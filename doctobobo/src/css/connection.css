@@ -106,7 +106,7 @@ form button {
 .retour_inscription {
     width: 700px;
     border: 1px solid;
-    border-radius: 8px; /*permet d'arrondir les angles du cadre*/
+    border-radius: 8px;
     border: 1px solid;
     background: white;
 }
@@ -116,3 +116,62 @@ form button {
     text-align : center;
     font-weight: bold;
 }
+
+.connection_compte form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.radio-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.radio-buttons label {
+    margin-right: 10px;
+}
+
+.radio-buttons input {
+    margin-right: 5px;
+}
+
+.connection_compte label {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.connection_compte input[type="password"],
+.connection_compte input[type="text"] {
+    height: 30px;
+}
+
+.connection_compte div {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.connection_compte label { /*ne pas enlever */
+    margin-right: 1rem;
+}
+
+.retour_inscription button {
+    background-color: rgb(26, 146, 216);
+    color: rgb(255, 255, 0);
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.retour_inscription {
+    margin-top: 10px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+
+
+

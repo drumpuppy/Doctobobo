@@ -35,29 +35,33 @@ function Inscription() {
         <div className="creation_compte">
             <h1>Je crée mon compte Doctobobo</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <input type="radio" name="titre" value="docteur" onChange={(e) => setUserType(e.target.value)} /> Docteur
-                    <input type="radio" name="titre" value="patient" onChange={(e) => setUserType(e.target.value)} /> Patient
+            <div className="radio-group">
+                    <label>
+                        <input type="radio" name="titre" value="docteur" onChange={() => setUserType('docteur')} /> Docteur
+                    </label>
+                    <label>
+                        <input type="radio" name="titre" value="patient" onChange={() => setUserType('patient')} /> Patient
+                    </label>
                 </div>
                 <div>
                     <label>Votre prénom :</label>
-                    <input type="text" value={prenom} onChange={(e) => setPrenom(e.target.value)} required />
+                    <input type="text" placeholder="Jean" value={prenom} onChange={(e) => setPrenom(e.target.value)} required />
                 </div>
                 <div>
                     <label>Votre nom :</label>
-                    <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
+                    <input type="text" placeholder="Dupont" value={nom} onChange={(e) => setNom(e.target.value)} required />
                 </div>
                 <div>
                     <label>Votre date de naissance :</label>
-                    <input type="text" value={age} onChange={(e) => setAge(e.target.value)} required />
+                    <input type="text" placeholder="18/03/1978" value={age} onChange={(e) => setAge(e.target.value)} required />
                 </div>
                 <div>
                     <label>Votre adresse email :</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="email" placeholder="monadresse@mail.fr" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div>
                     <label>Votre mot de passe :</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <div>
                     <button type="submit">Création du compte</button>

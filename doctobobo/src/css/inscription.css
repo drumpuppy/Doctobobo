@@ -116,3 +116,47 @@ form button {
     text-align : center;
     font-weight: bold;
 }
+
+.creation_compte form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.radio-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.radio-buttons label {
+    margin-right: 10px;
+}
+
+.radio-buttons input {
+    margin-right: 5px;
+}
+
+.creation_compte label {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.creation_compte input[type="password"],
+.creation_compte input[type="email"],
+.creation_compte input[type="text"] {
+    height: 30px;
+}
+
+.creation_compte div {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.creation_compte label { /*ne pas enlever */
+    margin-right: 1rem;
+}
+
+
+
+

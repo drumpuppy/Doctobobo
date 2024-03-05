@@ -42,10 +42,15 @@ function Connection() {
         <div className="connection_compte">
             <h1>J'ai un compte Doctobobo</h1>
             <form onSubmit={handleLogin}>
-                <div>
-                    <input type="radio" name="titre" value="docteur" onChange={() => setUserType('docteur')} /> Docteur
-                    <input type="radio" name="titre" value="patient" onChange={() => setUserType('patient')} /> Patient
+                <div className="radio-group">
+                    <label>
+                        <input type="radio" name="titre" value="docteur" onChange={() => setUserType('docteur')} /> Docteur
+                    </label>
+                    <label>
+                        <input type="radio" name="titre" value="patient" onChange={() => setUserType('patient')} /> Patient
+                    </label>
                 </div>
+
                 <div>
                     <label htmlFor="email">Votre adresse email :</label>
                     <input type="text" id="email" name="email" placeholder="monadresse@mail.fr" value={email} onChange={(e) => setEmail(e.target.value)} required />
