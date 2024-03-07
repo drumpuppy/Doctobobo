@@ -7,32 +7,31 @@ body {
     justify-content: center;
     color: #303030;
 }
-
 .menu {
     display: flex;
-    flex-wrap: wrap; /* Pour gérer les retours à la ligne si nécessaire */
-    width: 100%; /* Prend toute la largeur disponible */
-    margin: 0; /* Supprime les marges */
-    padding: 0; /* Supprime les marges internes */
+    flex-wrap: wrap;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
     background-color: #14d3c9;
     justify-content: space-around;
+    margin-bottom: 40px;
 }
 
 .menu li {
-    list-style-type: none ;       /* Suppression des puces */
-  
+    list-style-type: none;
+      
 }
 
 .menu a {
-    display:block;                /* Transformation en block */
-    min-width: 120px;             /* Largeur minimale des liens */   
-    
-    margin: 0.5rem;               /* Marges externes */
-    padding: 0.4rem 0;            /* Marges internes */
-    text-align: center;           /* Centrage du texte */   
-    border-radius: 4px;          /* Arrondis des bordures */
+    display:block;                
+    min-width: 120px;
+    margin: 0.5rem;
+    padding: 0.4rem 0;
+    text-align: center;   
+    border-radius: 4px;
 }
-
+    
 .menu a:hover{
     background-color: #0400f0;
     color: #ffe843;

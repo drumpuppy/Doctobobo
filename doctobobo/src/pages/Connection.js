@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Importez useNavigate
 import axios from 'axios';
-import '../css/connection.css'; // Ensure you have imported the CSS correctly
+import '../css/connection.css';
 
 function Connection() {
     const navigate = useNavigate();
@@ -10,22 +10,26 @@ function Connection() {
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    
     const handleLogin = async (e) => {
         e.preventDefault();
+        console.log('Starting login process...');
+    
         try {
+            console.log('Before axios.post');
             const response = await axios.post('http://localhost:4000/api/login', {
-              email,
-              password,
-              userType
+                email,
+                password,
+                userType,
             });
-
+            console.log('After axios.post, response:', response);
+    
             if (response.data.success) {
-                // Assuming the API response contains a success flag and possibly a token or user type
+                console.log('Login successful!');
                 localStorage.setItem('userType', userType);
-                // Adjust as needed, consider using React Router for navigation
-                window.location.href = '/my_space';
+                navigate('/my_space');
             } else {
+                console.log('Login failed:', response.data.message);
                 setErrorMessage('Invalid email or password. Please try again or sign up.');
             }
         } catch (error) {
@@ -33,9 +37,15 @@ function Connection() {
             setErrorMessage('An error occurred during login. Please try again.');
         }
     };
+    
+    
+    
+    
+    
+    
 
     const handleRegisterRedirect = () => {
-        navigate('/inscription');
+        navigate('/inscription'); // Utilisez également navigate pour rediriger vers '/inscription'
     };
 
     return (
@@ -44,25 +54,57 @@ function Connection() {
             <form onSubmit={handleLogin}>
                 <div className="radio-group">
                     <label>
-                        <input type="radio" name="titre" value="docteur" onChange={() => setUserType('docteur')} /> Docteur
+                        <input
+                            type="radio"
+                            name="titre"
+                            value="docteur"
+                            onChange={() => setUserType('docteur')}
+                        />{' '}
+                        Docteur
                     </label>
                     <label>
-                        <input type="radio" name="titre" value="patient" onChange={() => setUserType('patient')} /> Patient
+                        <input
+                            type="radio"
+                            name="titre"
+                            value="patient"
+                            onChange={() => setUserType('patient')}
+                        />{' '}
+                        Patient
                     </label>
                 </div>
 
                 <div>
                     <label htmlFor="email">Votre adresse email :</label>
-                    <input type="text" id="email" name="email" placeholder="monadresse@mail.fr" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="monadresse@mail.fr"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
                 </div>
                 <div>
                     <label htmlFor="password">Votre mot de passe :</label>
-                    <input type="password" id="pwd" name="pwd" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input
+                        type="password"
+                        id="pwd"
+                        name="pwd"
+                        placeholder="Mot de passe"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
                 </div>
                 <div>
                     <button type="submit">Se connecter</button>
                 </div>
-                {errorMessage && <div className="error-message" style={{ color: 'red' }}>{errorMessage}</div>}
+                {errorMessage && (
+                    <div className="error-message" style={{ color: 'red' }}>
+                        {errorMessage}
+                    </div>
+                )}
             </form>
 
             <div className="retour_inscription">

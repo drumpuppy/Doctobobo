@@ -7,15 +7,16 @@ body {
     justify-content: center;
     color: #303030;
 }
-    
+
 .menu {
     display: flex;
-    flex-wrap: wrap; /* Pour gérer les retours à la ligne si nécessaire */
-    width: 100%; /* Prend toute la largeur disponible */
-    margin: 0; /* Supprime les marges */
-    padding: 0; /* Supprime les marges internes */
+    flex-wrap: wrap;
+    width: 100vw; /* Utilisation de la largeur totale de la vue */
+    margin: 0;
+    padding: 0;
     background-color: #14d3c9;
     justify-content: space-around;
+    margin-bottom: 40px;
 }
 
 .menu li {
@@ -24,13 +25,12 @@ body {
 }
 
 .menu a {
-    display:block;                /* Transformation en block */
-    min-width: 120px;             /* Largeur minimale des liens */   
-    
-    margin: 0.5rem;               /* Marges externes */
-    padding: 0.4rem 0;            /* Marges internes */
-    text-align: center;           /* Centrage du texte */   
-    border-radius: 4px;          /* Arrondis des bordures */
+    display:block;                
+    min-width: 120px;
+    margin: 0.5rem;
+    padding: 0.4rem 0;
+    text-align: center;   
+    border-radius: 4px;
 }
     
 .menu a:hover{
@@ -39,18 +39,9 @@ body {
     border-color: #ffe843;
 }
 
-.resultat {
-    width: 700px;
-    border: 1px solid;
-    border-radius: 8px;
-    padding: 0 50px 0 50px;
-    background: white;
-}
-
-.resultat > h1 {       /*Aligne le titre du cadre*/
-    font-weight: 500;
-    text-align : center;
-    font-weight: bold;
+.recherche_docteur input[type="text"]{
+    height: 30px;
+    margin-right: 250px;
 }
 
 
