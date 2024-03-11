@@ -11,7 +11,7 @@ body {
 .menu {
     display: flex;
     flex-wrap: wrap;
-    width: 100vw; /* Utilisation de la largeur totale de la vue */
+    width: 100vw;
     margin: 0;
     padding: 0;
     background-color: #14d3c9;
@@ -20,8 +20,7 @@ body {
 }
 
 .menu li {
-    list-style-type: none ;       /* Suppression des puces */
-      
+    list-style-type: none;
 }
 
 .menu a {
@@ -39,27 +38,28 @@ body {
     border-color: #ffe843;
 }
 
-.recherche_docteur input[type="text"]{
+.recherche_docteur {
+    width: 800px;
+    height: 550px;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 0 20px;
+    background: white;
+    display: flex;
+    position: relative;
+}
+
+.recherche_docteur input[type="text"] {
     height: 30px;
-    margin-right: 250px;
+    margin-right: 300px;
 }
 
-
-.book-appointment-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgb(20, 125, 200);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 10px 0;
-    transition: background-color 0.2s ease;
+.recherche_docteur img {
+    width: 320px;
+    height: auto;
+    border-radius: 8px;
+    position: absolute;
+    right: 20px; 
+    top: 50%;
+    transform: translateY(-50%);
 }
-
-.book-appointment-button:hover {
-    background-color: rgb(10, 95, 170);
-}
-
-
-
-

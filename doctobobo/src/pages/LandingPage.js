@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/landing_page.css'; // Ensure the CSS file is in the correct directory
+import '../css/landing_page.css';
 
 function LandingPage() {
     const navigate = useNavigate();
@@ -58,6 +58,7 @@ function LandingPage() {
                     <div><input type="text" id="lieu" name="lieu" placeholder="Code postal" value={searchParams.lieu} onChange={handleChange} /></div>
                     <div><button type="submit">Rechercher</button></div>
                 </form>
+                <img src="./docteur.jpg" alt="Hello je suis la" />
             </div>
         </div>
     );
