@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/landing_page.css';
+import Menu from './Menu';
 
 function LandingPage() {
     const navigate = useNavigate();
@@ -43,13 +44,7 @@ function LandingPage() {
 
     return (
         <div>
-            <ul className="menu">
-                <li><Link to="/">Doctobobo</Link></li>
-                <li><Link to="/connection">Se connecter</Link></li>
-                <li><Link to="/meeting">Mes rendez-vous</Link></li>
-                <li><Link to="/my_space">Mon espace</Link></li>
-                <li><button id="logout-btn" onClick={handleLogout}>Se déconnecter</button></li>
-            </ul>
+            <Menu handleLogout={handleLogout} />
             <div className="recherche_docteur">
                 <h1>Je cherche un docteur</h1>
                 <form onSubmit={handleSearch}>
