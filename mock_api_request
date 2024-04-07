@@ -1,0 +1,47 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Doctobobo",
+    "dateExported": "2024-03-27T12:31:09.177Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "661a86c4-5241-4b63-a3ca-638b53d2ac59",
+            "colId": "72cc8310-9ec5-49d8-a531-69a3ce27a638",
+            "containerId": "",
+            "name": "Patient Signup",
+            "url": "http://localhost:5000/auth/signup/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-27T11:34:01.924Z",
+            "modified": "2024-03-27T12:26:33.003Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "// DOCTER\r\n// {\r\n//   \"role\": \"doctor\",\r\n//   \"Nom\": \"Smith\",\r\n//   \"Prenom\": \"John\",\r\n//   \"DateNaissance\": \"1980-05-15\",\r\n//   \"email\": \"john2.smith@example.com\",\r\n//   \"password\": \"doctor123\",\r\n//   \"adresse\": \"456 Oak S2reet\",\r\n//   \"code_postal\": \"54321\",\r\n//   \"Specialite\": \"Cardiology\",\r\n//   \"description\": \"Experienced cardiologist with 10+ years of practice.\"\r\n// }\r\n\r\n// ****Patient****\r\n\r\n{\r\n  \"Nom\": \"John\",\r\n  \"Prenom\": \"Doe\",\r\n  \"DateNaissance\": \"1990-01-01\",\r\n  \"email\": \"john4.doe@example.com\",\r\n  \"password\": \"password123\",\r\n  \"adresse\": \"123 Main Street\",\r\n  \"code_postal\": \"12345\",\r\n  \"role\":\"patient\"\r\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7ee44236-a218-4d96-ab14-51402ff64a20",
+            "colId": "72cc8310-9ec5-49d8-a531-69a3ce27a638",
+            "containerId": "",
+            "name": "Patient Login",
+            "url": "http://localhost:5000/auth/login/",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-27T11:52:18.977Z",
+            "modified": "2024-03-27T12:30:59.369Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"john2.smith@example.com\",\n  \"password\": \"doctor123\",\n  \"role\":\"docter\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
