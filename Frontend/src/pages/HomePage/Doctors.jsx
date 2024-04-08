@@ -84,7 +84,7 @@ const Doctors = ({ search }) => {
 
             if (response.ok) {
               const data = await response.json();
-              toast.success("Appointment has been made");
+              toast.success("Rendez-vous enregistré");
               console.log(data.message);
             } else {
               console.error("Failed to add appointment:", response.statusText);
@@ -94,14 +94,14 @@ const Doctors = ({ search }) => {
           }
         } else {
           toast.error(
-            "Please Select Appoitnment Time Or Doctor Didnt Publish his Availablity"
+            "Merci de selectionner un créneau."
           );
         }
       } else {
-        toast.error("Doctor can not made appointment. Register as Patient");
+        toast.error("Vous ne pouvez pas prendre de rendez-vous, connectez vous en tant que patient");
       }
     } else {
-      toast.error("You Need To Login First");
+      toast.error("Vous n'êtes pas connecté à votre compte. Merci de vous connecter.");
     }
   };
   console.log(userData);
@@ -111,7 +111,7 @@ const Doctors = ({ search }) => {
   return (
     <Box sx={styles.main}>
       <Container sx={styles.cont}>
-        <Typography sx={styles.font}>All Available Doctors</Typography>
+        <Typography sx={styles.font}>Docteurs disponibles</Typography>
         <Box sx={styles.boxy}>
           <Grid
             container

@@ -55,21 +55,21 @@ const AddDoctorAvailablity = () => {
 
       if (response.ok) {
         const data = await response.json();
-        toast.success("Available Time Published");
+        toast.success("Agenda modifié avec succès");
       } else {
         console.error("Failed to update time availability");
-        toast.error("Failed to update time availability");
+        toast.error("Erreur lors de la modification de l'agenda");
       }
     } catch (error) {
       console.error("Error updating time availability:", error);
-      toast.error("Error updating time availability");
+      toast.error("Erreur lors de la modification de l'agenda");
     }
   };
 
   return (
     <>
       <Box sx={styles.main}>
-        <h2>ADD AVAILABLE TIMES</h2>
+        <h2>Ajouter vos disponibilités</h2>
         <Box>
           {timeSlots.map((slot, index) => (
             <Chip

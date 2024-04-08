@@ -89,7 +89,7 @@ const AccountSetting = () => {
   return (
     <Box sx={styles.main}>
       <Box sx={styles.typo}>
-        <Typography sx={styles.font}>Account Setting</Typography>
+        <Typography sx={styles.font}>Paramètres</Typography>
       </Box>
       <Box sx={styles.gridBox}>
         <Grid container rowSpacing={3} columnSpacing={4}>
@@ -112,7 +112,7 @@ const AccountSetting = () => {
             <TextField
               id="outlined-basic"
               variant="outlined"
-              label="Prenom"
+              label="Prénom"
               name={
                 userData.role === "patient"
                   ? "Prenom_Patient"
@@ -167,7 +167,7 @@ const AccountSetting = () => {
             <TextField
               id="outlined-basic"
               variant="outlined"
-              label="Postal Code"
+              label="Code postal"
               name="code_postal"
               type="number"
               value={formData.code_postal}
@@ -187,7 +187,7 @@ const AccountSetting = () => {
                 name="role"
                 onChange={handleChange}
               >
-                <MenuItem value={"Doctor"}>Doctor</MenuItem>
+                <MenuItem value={"Doctor"}>Docteur</MenuItem>
                 <MenuItem value={"Patient"}>Patient</MenuItem>
               </Select>
             </FormControl>
@@ -196,7 +196,7 @@ const AccountSetting = () => {
       </Box>
       <Box sx={styles.btnCont}>
         <Button sx={styles.btn} onClick={() => updateCall()}>
-          Save Changes
+          Sauvegarder
         </Button>
       </Box>
     </Box>

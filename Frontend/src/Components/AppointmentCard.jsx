@@ -41,22 +41,22 @@ export default function AppointmentCard({
           sx={[styles.typo, { color: "white", fontWeight: 600 }]}
           gutterBottom
         >
-          Date: {`${slot.startTime} to ${slot.endTime}`}
+          Date: {`de ${slot.startTime} à ${slot.endTime}`}
         </Typography>
         <Typography
           sx={[styles.typo, { color: "white", fontWeight: 600 }]}
           gutterBottom
         >
-          Time Slot: {`${slot.startTime} to ${slot.endTime}`}
+          Créneau: {`de ${slot.startTime} à ${slot.endTime}`}
         </Typography>
         <Typography sx={[styles.typo]} gutterBottom>
-          Patient Name: {patientName}
+          Nom du patient: {patientName}
         </Typography>
         <Typography sx={[styles.typo]} gutterBottom>
-          Doctor Name: {doctorName}
+          Nom du docteur: {doctorName}
         </Typography>
         <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom>
-          Patient Query: {question}
+          Demande: {question}
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -68,7 +68,7 @@ export default function AppointmentCard({
               }}
             >
               <Typography sx={[styles.typo, { fontSize: "18px" }]}>
-                Add Prescription:
+                Ajouter une prescription:
               </Typography>
               <TextField
                 fullWidth
@@ -91,7 +91,7 @@ export default function AppointmentCard({
           size="large"
           onClick={() => onUpdate(id, prescription, setPrescription)}
         >
-          SEND ANSWER
+          Envoyer la réponse
         </Button>
       </CardContent>
     </Card>

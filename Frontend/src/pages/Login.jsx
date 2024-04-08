@@ -22,7 +22,6 @@ import { AuthContext } from "../Context/AuthContext";
 const Login = () => {
   let initialFormData = {
     role: "",
-
     email: "",
     password: "",
   };
@@ -46,7 +45,7 @@ const Login = () => {
       password,
     } = formData;
     if (!email || !password || !role) {
-      toast.error("Fill all the Fields");
+      toast.error("Merci de remplir tous les champs");
       return;
     }
 
@@ -66,11 +65,11 @@ const Login = () => {
 
     console.log(responseData);
     if (responseData.status === 404) {
-      toast.error("User Not Found");
+      toast.error("L'Utilisateur inconnu");
     } else if (responseData.status === 401) {
       toast.error("Invalid Credentials");
     } else if (responseData.status === 200) {
-      toast.success("Login Successful");
+      toast.success("Connexion réussi");
       setUser(true);
       setUserData({ user: responseData?.data?.user, role: role });
       navigate("/Dashboard");
@@ -101,7 +100,7 @@ const Login = () => {
               id="outlined-basic"
               variant="outlined"
               type="password"
-              label="Password"
+              label="Mot de passe"
               name="password"
               value={formData.password}
               onChange={handleForm}
@@ -112,17 +111,17 @@ const Login = () => {
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">
                 {" "}
-                Select Your Role
+                Selectionner un rôle
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={role}
-                label="Select Your Role"
+                label="Choisir votre rôle"
                 name="role"
                 onChange={handleChange}
               >
-                <MenuItem value={"doctor"}>Doctor</MenuItem>
+                <MenuItem value={"doctor"}>Docteur</MenuItem>
                 <MenuItem value={"patient"}>Patient</MenuItem>
               </Select>
             </FormControl>
@@ -134,7 +133,7 @@ const Login = () => {
         </Button>
         <Box sx={styles.flex}>
           <Typography sx={{ fontFamily: "'Poppins'" }}>
-            Dont't have an account?
+            Vous n'avez pas encore de compte ?
           </Typography>
           <Box onClick={() => navigate("/Signup")}>
             <Typography sx={styles.logIn}>Signup</Typography>

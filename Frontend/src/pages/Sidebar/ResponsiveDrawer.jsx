@@ -59,36 +59,36 @@ function ResponsiveDrawer(props) {
     //   link: "/",
     // },
     {
-      text: "Account Setting",
+      text: "Paramètres",
       link: "/Dashboard",
     },
     {
-      text: "Home",
+      text: "Page d'accueil",
       link: "/",
     },
 
     {
-      text: " Appointments",
+      text: "Mes rendez-vous",
       link: "/Dashboard/PatientAppointment",
     },
   ];
   const DocList = [
     {
-      text: "Account Setting",
+      text: "Paramètres",
       link: "/Dashboard",
     },
     {
-      text: "Home",
+      text: "Page d'accueil",
       link: "/",
     },
 
     {
-      text: "Add Availablity",
+      text: "Mes disponibilités",
       link: "/Dashboard/avaiablity",
     },
 
     {
-      text: "Appointments",
+      text: "Mes rendez-vous",
       link: "/Dashboard/DoctorAppointment",
     },
   ];

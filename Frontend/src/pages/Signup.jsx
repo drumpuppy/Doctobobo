@@ -72,7 +72,7 @@ const Signup = () => {
       !code_postal ||
       (role === "doctor" && (!Specialite || !description))
     ) {
-      toast.error("Fill all the Fields");
+      toast.error("Merci de remplir tous les champs");
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -121,7 +121,7 @@ const Signup = () => {
       navigate("/Login");
       return;
     }
-    toast.error("User Already Exist");
+    toast.error("L'Utilisateur existe déjà");
   };
   useEffect(() => {
     console.log(formData);
@@ -168,7 +168,7 @@ const Signup = () => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DatePicker"]}>
                 <DatePicker
-                  label="Date of Birth"
+                  label="Date de naissance"
                   name="DateNaissance"
                   value={formData.DateNaissance}
                   onChange={(newValue) => handleDate(newValue)}
@@ -206,7 +206,7 @@ const Signup = () => {
             <TextField
               id="outlined-basic"
               variant="outlined"
-              label="Postal Code"
+              label="Code postal"
               name="code_postal"
               type="number"
               value={formData.code_postal}
@@ -220,7 +220,7 @@ const Signup = () => {
               id="outlined-basic"
               variant="outlined"
               type="password"
-              label="Password"
+              label="Mot de passe "
               name="password"
               value={formData.password}
               onChange={handleForm}
@@ -239,7 +239,7 @@ const Signup = () => {
                 name="role"
                 onChange={handleChange}
               >
-                <MenuItem value={"doctor"}>Doctor</MenuItem>
+                <MenuItem value={"doctor"}>Docteur</MenuItem>
                 <MenuItem value={"patient"}>Patient</MenuItem>
               </Select>
             </FormControl>
@@ -253,7 +253,7 @@ const Signup = () => {
                   name="Specialite"
                   value={formData.Specialite}
                   onChange={handleForm}
-                  label="Specialite"
+                  label="Spécialité"
                   fullWidth
                 />
               </Grid>
@@ -279,10 +279,10 @@ const Signup = () => {
         </Button>
         <Box sx={styles.flex}>
           <Typography sx={{ fontFamily: "'Poppins'" }}>
-            Already have an account?
+            Vous avez déjà un compte ?
           </Typography>
           <Box onClick={() => navigate("/Login")}>
-            <Typography sx={styles.logIn}>Login in</Typography>
+            <Typography sx={styles.logIn}>Se connecter</Typography>
           </Box>
         </Box>
       </Box>

@@ -40,19 +40,19 @@ export default function PatientCard({
           sx={[styles.typo, { color: "white", fontWeight: 600 }]}
           gutterBottom
         >
-          Appointment Date: {date}
+          Date: {date}
         </Typography>
         <Typography
           sx={[styles.typo, { color: "white", fontWeight: 600 }]}
           gutterBottom
         >
-          Time Slot: {`${slot.startTime} to ${slot.endTime}`}
+          Créneau: {`${slot.startTime} to ${slot.endTime}`}
         </Typography>
         <Typography sx={[styles.typo]} gutterBottom>
-          Patient Name: {patientName}
+          Nom du patient: {patientName}
         </Typography>
         <Typography sx={[styles.typo]} gutterBottom>
-          Doctor Name: {doctorName}
+          Nom du patient: {doctorName}
         </Typography>
         <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom>
           Your Query: {question}

@@ -56,7 +56,7 @@ const Doctobo = () => {
 
       if (response.ok) {
         const data = await response.json();
-        toast.success("Appointment has been made");
+        toast.success("Le rendez-vous est enregistré");
         console.log(data.message);
       } else {
         console.error("Failed to add appointment:", response.statusText);

@@ -44,13 +44,13 @@ const Header = () => {
         {user ? (
           <>
             <Box onClick={() => handleLogout()} sx={{ cursor: "pointer" }}>
-              <Typography sx={styles.typo}>Logout</Typography>
+              <Typography sx={styles.typo}>Se déconnecter</Typography>
             </Box>
           </>
         ) : (
           <>
             <Box onClick={() => navigate("/Login")} sx={{ cursor: "pointer" }}>
-              <Typography sx={styles.typo}>Login/Register</Typography>
+              <Typography sx={styles.typo}>Connexion/Inscription</Typography>
             </Box>
           </>
         )}

@@ -114,7 +114,7 @@ function DoctorCard({
             color: "white",
           }}
         >
-          Specialite : {data?.Specialite}
+          Spécialité : {data?.Specialite}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="white">
           Email : {data?.email}
@@ -131,7 +131,7 @@ function DoctorCard({
               color: "white",
             }}
           >
-            Select Date:
+            Selectionner une date:
           </Typography>
         </Box>
         <input
@@ -149,7 +149,7 @@ function DoctorCard({
               color: "white",
             }}
           >
-            Available Timings:
+            Créneaux disponibles:
           </Typography>
         </Box>
         <Grid container>
@@ -211,7 +211,7 @@ function DoctorCard({
             )
           }
         >
-          Add Appointment
+          Prendre rendez-vous
         </Button>
       </CardActions>
     </Card>

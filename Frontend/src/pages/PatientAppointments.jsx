@@ -29,7 +29,7 @@ const PatientAppointments = () => {
   return (
     <Box sx={styles.main}>
       <Box sx={styles.typo}>
-        <Typography sx={styles.font}>My Appointments</Typography>
+        <Typography sx={styles.font}>Mes Rendez-vous</Typography>
       </Box>
       <Box sx={styles.gridBox}>
         <Grid container columnSpacing={3} rowSpacing={3}>
