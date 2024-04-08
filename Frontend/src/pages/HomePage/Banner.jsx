@@ -49,7 +49,7 @@ const Banner = ({ search, handleChange }) => {
           <Grid item lg={7} xs={12}>
             <Box sx={styles.flex}>
               <Typography sx={styles.font}>
-                Bienvenue sur doctobobo, la plateforme qui met en relation professionnels de santé et patients ! 
+                Bienvenue sur Doctobobo, la plateforme qui met en relation professionnels de santé et patients ! 
               </Typography>
               <Search search={search} handleChange={handleChange} />
             </Box>

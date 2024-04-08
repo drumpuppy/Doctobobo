@@ -32,7 +32,7 @@ const Search = ({ handleChange, search }) => {
                   style={{ verticalAlign: "4px", width: "100%" }}
                   type="search"
                   name="focus"
-                  placeholder="Search Doctors By Location Or Speciality ..."
+                  placeholder="Chercher un docteur"
                   id="search-input"
                   value={search}
                   onChange={(e) => handleChange(e)}
