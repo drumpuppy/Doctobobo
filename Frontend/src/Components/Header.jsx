@@ -38,7 +38,7 @@ const Header = () => {
     <Box sx={styles.main}>
       <Container sx={styles.cont}>
         <Box onClick={() => navigate("/Dashboard")} sx={{ cursor: "pointer" }}>
-          <Typography sx={styles.typo}>Dashboard</Typography>
+          <Typography sx={styles.typo}>Menu</Typography>
         </Box>
 
         {user ? (

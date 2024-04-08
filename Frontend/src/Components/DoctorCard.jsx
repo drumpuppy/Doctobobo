@@ -188,7 +188,7 @@ function DoctorCard({
         <TextField
           id="outlined-basic"
           variant="outlined"
-          label="Enter Your Problem or query"
+          label="Quel est votre bobo ?"
           name="query"
           onChange={(e) => handleQuery(e)}
           fullWidth
