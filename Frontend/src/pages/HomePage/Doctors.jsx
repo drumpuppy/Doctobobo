@@ -64,9 +64,7 @@ const Doctors = ({ search }) => {
             console.error("Error adding appointment:", error);
           }
         } else {
-          toast.error(
-            "Merci de selectionner un créneau."
-          );
+          toast.error("Merci de selectionner un créneau.");
         }
       } else {
         toast.error("Vous ne pouvez pas prendre de rendez-vous, connectez vous en tant que patient");
@@ -89,7 +87,8 @@ const Doctors = ({ search }) => {
             container
             columnSpacing={3}
             rowSpacing={3}
-            display={"flex"}
+            display={"flex"} // Utilisez flexbox pour aligner les cartes des médecins horizontalement
+            flexWrap="wrap" // Permettre aux cartes de s'aligner horizontalement et de passer à la ligne si nécessaire
             justifyContent={"center"}
           >
             {docs &&
@@ -104,7 +103,7 @@ const Doctors = ({ search }) => {
                 )
                 .map((item, index) => {
                   return (
-                    <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
+                    <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
                       <DoctorCard
                         data={item}
                         handleDate={handleDate}

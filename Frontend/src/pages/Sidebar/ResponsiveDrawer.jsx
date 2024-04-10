@@ -74,10 +74,7 @@ function ResponsiveDrawer(props) {
       },
   ];
   const DocList = [
-    {
-      text: "Paramètres",
-      link: "/Dashboard",
-    },
+
     {
       text: "Page d'accueil",
       link: "/",
@@ -91,6 +88,11 @@ function ResponsiveDrawer(props) {
     {
       text: "Mes rendez-vous",
       link: "/Dashboard/DoctorAppointment",
+    },
+    
+    {
+      text: "Paramètres",
+      link: "/Dashboard",
     },
   ];
 

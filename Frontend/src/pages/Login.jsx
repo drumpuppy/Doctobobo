@@ -81,7 +81,9 @@ const Login = () => {
   return (
     <Box sx={styles.mainScreen}>
       <Box sx={styles.LoginBox}>
-        <Typography sx={styles.font}>Login</Typography>
+      <Typography sx={{ ...styles.font, textAlign: "center" }}>
+          J'ai déjà un compte Doctobobo
+        </Typography>
         <Grid container rowSpacing={3} columnSpacing={4}>
           <Grid item xs={12} lg={12}>
             <TextField
@@ -129,14 +131,14 @@ const Login = () => {
         </Grid>
 
         <Button sx={styles.btn} onClick={handleSubmit}>
-          Login
+          Se connecter
         </Button>
         <Box sx={styles.flex}>
           <Typography sx={{ fontFamily: "'Poppins'" }}>
             Vous n'avez pas encore de compte ?
           </Typography>
           <Box onClick={() => navigate("/Signup")}>
-            <Typography sx={styles.logIn}>Signup</Typography>
+            <Typography sx={styles.logIn}>S'inscrire</Typography>
           </Box>
         </Box>
       </Box>

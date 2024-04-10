@@ -195,7 +195,7 @@ function DoctorCard({
           sx={{ marginTop: "12px", background: "white", borderRadius: "20px" }}
         />
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'center' }}>
         <Button
           sx={{
             background: "white",

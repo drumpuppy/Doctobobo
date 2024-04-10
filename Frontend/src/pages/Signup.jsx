@@ -129,7 +129,7 @@ const Signup = () => {
   return (
     <Box sx={styles.mainScreen}>
       <Box sx={styles.SignupBox}>
-        <Typography sx={styles.font}>Signup</Typography>
+        <Typography sx={styles.font}>Nouveau sur Doctobobo ?</Typography>
         <Grid container rowSpacing={3} columnSpacing={4}>
           <Grid item lg={6} md={6} sm={6} xs={12}>
             <TextField
@@ -275,7 +275,7 @@ const Signup = () => {
         </Grid>
 
         <Button sx={styles.btn} onClick={handleSubmit}>
-          Signup
+          S'inscrire
         </Button>
         <Box sx={styles.flex}>
           <Typography sx={{ fontFamily: "'Poppins'" }}>
