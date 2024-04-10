@@ -6,6 +6,7 @@ import DoctorCard from "../Components/DoctorCard";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+
 const mockData = [{}, {}, {}, {}, {}, {}, {}];
 const Doctobo = () => {
   const [docs, setDocs] = useState([]);

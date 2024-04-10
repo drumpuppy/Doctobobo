@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import Signup from "./pages/Signup";
 import { BrowserRouter as Router } from "react-router-dom";

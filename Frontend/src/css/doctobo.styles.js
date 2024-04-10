@@ -1,47 +1,55 @@
+import steImage from "../assets/ste.png";
+
 export const styles = {
   main: {
     marginTop: "60px",
-
     padding: "20px",
-
     width: "100%",
+    position: "relative",
   },
-  typo: {
-    width: "100%",
+  cont: {
+    paddingTop: "50px",
+    maxWidth: { lg: "1500px" },
   },
   font: {
     fontFamily: "'poppins'",
     color: "black",
     fontSize: "30px",
-
     fontWeight: 600,
-    marginLeft: "10px",
+    textAlign: "center",
   },
-  gridBox: {
-    marginTop: "30px",
-  },
-  btnCont: {
-    width: "100%",
+  flex: {
     display: "flex",
-    justifyContent: "flex-end",
-    marginTop: "20px",
+    flexDirection: "column",
   },
-  btn: {
-    fontFamily: "'poppins'",
-    width: "20%",
-    background:
-      "linear-gradient(90deg, rgba(5,117,230,1) 0%, rgba(2,41,138,1) 82%)",
-    color: "white",
-    paddingY: "10px",
-    fontSize: "15px",
+  boxy: {
+    marginTop: "40px",
   },
-  appointBtn: {
-    fontFamily: "'poppins'",
-
-    background:
-      "linear-gradient(90deg, rgba(5,117,230,1) 0%, rgba(2,41,138,1) 82%)",
-    color: "white",
-
-    fontSize: "15px",
+  // Style pour l'arrière-plan avec l'image ste.png
+  background: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url(${steImage})`,
+    backgroundRepeat: "repeat",
+    zIndex: -1,
+  },
+  doctorPageStyles: {
+    mainContainer: {
+      position: "relative",
+      padding: "20px",
+    },
+    title: {
+      fontFamily: "'poppins'",
+      fontSize: "30px",
+      fontWeight: 600,
+      textAlign: "center",
+      marginTop: "50px",
+    },
+    doctorsContainer: {
+      marginTop: "40px",
+    },
   },
 };

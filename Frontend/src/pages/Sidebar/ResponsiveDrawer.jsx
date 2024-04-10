@@ -58,19 +58,20 @@ function ResponsiveDrawer(props) {
     //   text: "Doctobo",
     //   link: "/",
     // },
-    {
-      text: "Paramètres",
-      link: "/Dashboard",
-    },
-    {
-      text: "Page d'accueil",
-      link: "/",
-    },
-
-    {
-      text: "Mes rendez-vous",
-      link: "/Dashboard/PatientAppointment",
-    },
+      {
+        text: "Page d'accueil",
+        link: "/",
+      },
+  
+      {
+        text: "Mes rendez-vous",
+        link: "/Dashboard/PatientAppointment",
+      },
+  
+      {
+        text: "Paramètres",
+        link: "/Dashboard",
+      },
   ];
   const DocList = [
     {

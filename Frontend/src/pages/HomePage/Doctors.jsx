@@ -1,39 +1,10 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import DoctorCard from "../../Components/DoctorCard";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
-const styles = {
-  main: {
-    width: "100%",
-    paddingY: "30px",
-    // marginTop: "20px",
-  },
-  cont: {
-    paddingTop: "50px",
-    maxWidth: { lg: "1500px" },
-  },
-  image: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-  },
-  font: {
-    fontFamily: "'poppins'",
-    color: "black",
-
-    fontSize: "30px",
-    fontWeight: 600,
-    textAlign: "center",
-  },
-  flex: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  boxy: {
-    marginTop: "40px",
-  },
-};
+import steImage from "../../assets/ste.png";
+import { styles } from "../../css/doctobo.styles";
 
 const Doctors = ({ search }) => {
   const [docs, setDocs] = useState([]);
@@ -108,8 +79,9 @@ const Doctors = ({ search }) => {
   useEffect(() => {
     getAllDoctors();
   }, []);
+
   return (
-    <Box sx={styles.main}>
+    <Box sx={{ ...styles.main, backgroundImage: `url(${steImage})` }}>
       <Container sx={styles.cont}>
         <Typography sx={styles.font}>Docteurs disponibles</Typography>
         <Box sx={styles.boxy}>
