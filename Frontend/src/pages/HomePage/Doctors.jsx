@@ -87,8 +87,8 @@ const Doctors = ({ search }) => {
             container
             columnSpacing={3}
             rowSpacing={3}
-            display={"flex"} // Utilisez flexbox pour aligner les cartes des médecins horizontalement
-            flexWrap="wrap" // Permettre aux cartes de s'aligner horizontalement et de passer à la ligne si nécessaire
+            display={"flex"}
+            flexWrap="wrap"
             justifyContent={"center"}
           >
             {docs &&
