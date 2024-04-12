@@ -49,3 +49,25 @@ INSERT INTO doctobobo.Medecin (idMedecin, Nom_Medecin, Prenom_Medecin, DateNaiss
 ('id18', 'Bertrand', 'Anne', '1984-11-30', 'Gastroentérologie', 'anne.bertrand@email.com', 'password_hash', '140 rue de Rouen', '76000', 'Gastroentérologue avec une expertise en hépatologie'),
 ('id19', 'Morel', 'Benoît', '1977-02-18', 'Urologie', 'benoit.morel@email.com', 'password_hash', '141 rue de Amiens', '80000', 'Urologue expérimenté dans le traitement de l\'infertilité'),
 ('id20', 'Fournier', 'Sandrine', '1969-09-09', 'Ophtalmologie', 'sandrine.fournier@email.com', 'password_hash', '142 rue de Clermont-Ferrand', '63000', 'Spécialiste en chirurgie réfractive');
+
+INSERT INTO doctobobo.Medecin (idMedecin, Nom_Medecin, Prenom_Medecin, DateNaissance, Specialite, email, password, adresse, code_postal, description) VALUES
+('id21', 'Girard', 'Mathieu', '1987-03-21', 'Anesthésiologie', 'mathieu.girard@email.com', 'password_hash', '143 rue de Clermont-Ferrand', '63001', 'Spécialiste en anesthésie et réanimation'),
+('id22', 'Perrin', 'Nathalie', '1971-07-15', 'Neurochirurgie', 'nathalie.perrin@email.com', 'password_hash', '144 rue de Saint-Etienne', '42001', 'Neurochirurgienne avec une longue expérience'),
+('id23', 'Lemoine', 'Philippe', '1989-11-30', 'Oncologie', 'philippe.lemoine@email.com', 'password_hash', '145 rue de Brest', '29200', 'Oncologue spécialisé dans le traitement des cancers rares'),
+('id24', 'Moulin', 'Isabelle', '1978-01-25', 'Pédiatrie', 'isabelle.moulin@email.com', 'password_hash', '146 rue de Tours', '37000', 'Pédiatre dédiée aux soins primaires des enfants'),
+('id25', 'Marchand', 'Thierry', '1965-05-19', 'Radiologie', 'thierry.marchand@email.com', 'password_hash', '147 rue de Metz', '57000', 'Radiologue spécialisé en imagerie musculosquelettique'),
+('id26', 'Dufour', 'Cécile', '1982-09-12', 'Cardiologie', 'cecile.dufour@email.com', 'password_hash', '148 rue de Besançon', '25000', 'Cardiologue avec un intérêt particulier pour l\'arythmie'),
+('id27', 'Lambert', 'Dominique', '1970-04-07', 'Dermatologie', 'dominique.lambert@email.com', 'password_hash', '149 rue de Caen', '14000', 'Dermatologue spécialisée dans le psoriasis'),
+('id28', 'Bonnet', 'Frédéric', '1993-12-13', 'Endocrinologie', 'frederic.bonnet@email.com', 'password_hash', '150 rue de Orleans', '45000', 'Endocrinologue, expert en maladies thyroïdiennes'),
+('id29', 'Francois', 'Stéphanie', '1985-08-09', 'Gastroentérologie', 'stephanie.francois@email.com', 'password_hash', '151 rue de Angers', '49000', 'Gastroentérologue, focalisée sur les maladies inflammatoires'),
+('id30', 'Martinez', 'Lucas', '1972-11-25', 'Urologie', 'lucas.martinez@email.com', 'password_hash', '152 rue de Nîmes', '30000', 'Urologue spécialisé dans la chirurgie laparoscopique'),
+('id31', 'Legrand', 'Valérie', '1984-02-18', 'Ophtalmologie', 'valerie.legrand@email.com', 'password_hash', '153 rue de Le Mans', '72000', 'Ophtalmologue avec une expertise en glaucome'),
+('id32', 'Garnier', 'Julien', '1976-03-22', 'Orthopédie', 'julien.garnier@email.com', 'password_hash', '154 rue de Aix-en-Provence', '13090', 'Orthopédiste spécialisé dans la chirurgie du genou'),
+('id33', 'Faure', 'Sylvie', '1991-07-11', 'Psychiatrie', 'sylvie.faure@email.com', 'password_hash', '155 rue de Limoges', '87000', 'Psychiatre intéressée par les thérapies cognitivo-comportementales'),
+('id34', 'Rousseau', 'Vincent', '1969-08-26', 'Rhumatologie', 'vincent.rousseau@email.com', 'password_hash', '156 rue de Clermont', '63000', 'Rhumatologue avec une spécialisation en spondylarthrite'),
+('id35', 'Blanc', 'Emmanuelle', '1990-10-14', 'Neurologie', 'emmanuelle.blanc@email.com', 'password_hash', '157 rue de Poitiers', '86000', 'Neurologue spécialisée dans les maladies dégénératives'),
+('id36', 'Guillaume', 'Béatrice', '1986-01-30', 'Anesthésiologie', 'beatrice.guillaume@email.com', 'password_hash', '158 rue de Avignon', '84000', 'Anesthésiste-réanimateur avec une approche centrée sur le patient'),
+('id37', 'Lefebvre', 'Marc', '1974-06-15', 'Oncologie', 'marc.lefebvre@email.com', 'password_hash', '159 rue de Perpignan', '66000', 'Oncologue médical spécialisé dans les traitements innovants'),
+('id38', 'Mercier', 'Denise', '1988-05-22', 'Radiologie', 'denise.mercier@email.com', 'password_hash', '160 rue de Nancy', '54000', 'Radiologue expérimentée en mammographie'),
+('id39', 'Dupuis', 'Antoine', '1979-04-09', 'Cardiologie', 'antoine.dupuis@email.com', 'password_hash', '161 rue de Roubaix', '59100', 'Cardiologue, expert en échocardiographie'),
+('id40', 'Vasseur', 'Louise', '1994-12-03', 'Dermatologie', 'louise.vasseur@email.com', 'password_hash', '162 rue de Béziers', '34500', 'Dermatologue intéressée par la dermatologie esthétique');

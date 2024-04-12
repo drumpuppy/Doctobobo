@@ -44,8 +44,10 @@ const Signup = () => {
   };
 
   const handleDate = (value) => {
-    setFormData({ ...formData, DateNaissance: value });
-    console.log(value.toISOString().slice(0, 10));
+    if (value) {
+      setFormData({ ...formData, DateNaissance: value });
+      // console.log(value.toISOString().slice(0, 10));
+    }
   };
 
   const handleSubmit = async () => {
@@ -153,7 +155,7 @@ const Signup = () => {
               fullWidth
             />
           </Grid>
-          <Grid item lg={6} md={12} sm={12} xs={12}>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
             <TextField
               id="outlined-basic"
               variant="outlined"
@@ -164,12 +166,20 @@ const Signup = () => {
               fullWidth
             />
           </Grid>
-          <Grid item lg={6} md={12} sm={12} xs={12}>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
+            <DemoContainer
+                components={["DatePicker"]}
+                sx={{
+                  ".MuiTextField-root": {
+                    width: "100%",
+                  },
+                }}
+              >
                 <DatePicker
                   label="Date de naissance"
                   name="DateNaissance"
+                  fullWidth
                   value={formData.DateNaissance}
                   onChange={(newValue) => handleDate(newValue)}
                 />

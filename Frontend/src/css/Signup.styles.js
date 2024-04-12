@@ -1,6 +1,7 @@
 export const styles = {
   mainScreen: {
-    height: "100vh",
+    minHeight: "100vh",
+    paddingY: "3rem",
     width: "100%",
 
     background:
