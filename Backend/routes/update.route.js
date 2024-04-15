@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { db } = global;
 router.put("/update", async (req, res) => {
-  const { role, Nom, Prenom, DateNaissance, email, adresse, code_postal } =
+  const { role, Nom, Prenom, email, adresse, code_postal } =
     req.body;
 
   try {
@@ -11,7 +11,6 @@ router.put("/update", async (req, res) => {
           UPDATE User
           SET Nom_Patient = '${req.body.Nom_Patient}',
           Prenom_Patient = '${req.body.Prenom_Patient}',
-              DateNaissance = '${DateNaissance}',
               email = '${email}',
               adresse = '${adresse}',
               code_postal = '${code_postal}'
@@ -23,7 +22,6 @@ router.put("/update", async (req, res) => {
           UPDATE Medecin
           SET Nom_Medecin = '${req.body.Nom_Medecin}',
               Prenom_Medecin = '${req.body.Prenom_Medecin}',
-              DateNaissance = '${DateNaissance}',
               email = '${email}',
               adresse = '${adresse}',
               code_postal = '${code_postal}'

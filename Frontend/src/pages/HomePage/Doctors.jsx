@@ -6,13 +6,14 @@ import toast from "react-hot-toast";
 import steImage from "../../assets/ste.png";
 import { styles } from "../../css/doctobo.styles";
 
-const Doctors = ({ search }) => {
+const Doctors = ({ search, searchPostalCode }) => {
   const [docs, setDocs] = useState([]);
   const [selectedDate, setSelectedDate] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [selectedTimeItem, setSelectedTimeItem] = useState({});
   const [patientQuery, setpatientQuery] = useState("");
   const { userData, user } = useContext(AuthContext);
+  
   const getAllDoctors = async () => {
     const response = await fetch("http://localhost:5000/Medecin/Medecin", {
       method: "GET",
@@ -22,9 +23,31 @@ const Doctors = ({ search }) => {
     });
     const responseData = await response.json();
 
-    console.log(responseData.medicines[0]);
-    setDocs(responseData.medicines[0]);
+ 
+
+
+    let filteredDoctors = responseData.medicines[0];
+    
+    // Filtrer en fonction du code postal
+    if (searchPostalCode) {
+      filteredDoctors = filteredDoctors.filter(doc =>
+        doc.codePostal.toLowerCase().includes(searchPostalCode.toLowerCase())
+      );
+    }
+
+    // Filtrer en fonction du nom/spécialité
+    filteredDoctors = filteredDoctors.filter(doc =>
+      doc.Specialite.toLowerCase().includes(search.toLowerCase()) ||
+      doc.Nom_Medecin.toLowerCase().includes(search.toLowerCase())
+    );
+
+    setDocs(filteredDoctors);
   };
+
+
+
+
+
   const handleDate = (e) => {
     setSelectedDate(e.target.value);
   };
@@ -76,7 +99,7 @@ const Doctors = ({ search }) => {
   console.log(userData);
   useEffect(() => {
     getAllDoctors();
-  }, []);
+  },[search, searchPostalCode]);
 
   return (
     <Box sx={{ ...styles.main, backgroundImage: `url(${steImage})` }}>
@@ -99,7 +122,7 @@ const Doctors = ({ search }) => {
                     doc.Specialite.toLowerCase().includes(
                       search.toLowerCase()
                     ) ||
-                    doc.adresse.toLowerCase().includes(search.toLowerCase())
+                    doc.Nom_Medecin.toLowerCase().includes(search.toLowerCase())
                 )
                 .map((item, index) => {
                   return (

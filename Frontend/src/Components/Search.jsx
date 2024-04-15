@@ -1,12 +1,9 @@
-import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
 import { LuSearch } from "react-icons/lu";
-import { IoMdAdd } from "react-icons/io";
-import { BsCalendar4Event } from "react-icons/bs";
-import { BiMessageSquareError } from "react-icons/bi";
-import { SlBell } from "react-icons/sl";
 
-const Search = ({ handleChange, search }) => {
+
+const Search = ({ handleChange, handleChangePostalCode, search, searchPostalCode }) => {
   return (
     <>
       <Box sx={style.main}>
@@ -40,37 +37,48 @@ const Search = ({ handleChange, search }) => {
               </form>
             </Box>
           </Grid>
-          {/* <Grid item lg={6}>
-            <Box sx={style.searchRightBox}>
-              
-
-              <Box sx={style.flexAvatar}>
-                <Avatar
-                  alt="A"
-                  src="/static/images/avatar/1.jpg"
-                  sx={{ width: 56, height: 56 }}
+          <Grid item lg={5} xs={12}>
+            <Box sx={style.searchLeftBox}>
+              <form className="search-box">
+                <button
+                  style={{ background: "none", border: "none", padding: 0 }}
+                >
+                  <span
+                    className="material-symbols-outlined"
+                    style={{
+                      fontSize: "23px",
+                      verticalAlign: "-1px",
+                      color: "#9B9B9B",
+                    }}
+                  >
+                    <LuSearch style={{ marginTop: "5px" }} />
+                  </span>
+                </button>
+                <input
+                  style={{ verticalAlign: "4px", width: "100%" }}
+                  type="search"
+                  name="focus"
+                  placeholder="Chercher par code postal"
+                  id="search-input"
+                  value={searchPostalCode}
+                  onChange={(e) => handleChangePostalCode(e)}
                 />
-                <Box>
-                  <Typography sx={style.bold}>Admin</Typography>
-                  <Typography sx={[style.bold, { opacity: 0.5 }]}>
-                    admin@admin.com
-                  </Typography>
-                </Box>
-              </Box>
+              </form>
             </Box>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Box>
     </>
   );
 };
 
+
 export default Search;
 const style = {
   main: {
     width: "100%",
     color: "black",
-    marginTop: "20px",
+    marginTop: "60px",
   },
   searchLeftBox: {
     width: "100%",

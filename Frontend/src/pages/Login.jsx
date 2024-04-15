@@ -72,7 +72,7 @@ const Login = () => {
       toast.success("Connexion réussi");
       setUser(true);
       setUserData({ user: responseData?.data?.user, role: role });
-      navigate("/Dashboard");
+      navigate("/");
     }
   };
   useEffect(() => {

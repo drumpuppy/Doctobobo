@@ -91,9 +91,10 @@ const AccountSetting = () => {
       <Box sx={styles.typo}>
         <Typography sx={styles.font}>Paramètres</Typography>
       </Box>
+      
       <Box sx={styles.gridBox}>
         <Grid container rowSpacing={3} columnSpacing={4}>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
             <TextField
               id="outlined-basic"
               variant="outlined"
@@ -174,23 +175,6 @@ const AccountSetting = () => {
               onChange={handleForm}
               fullWidth
             />
-          </Grid>
-
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Role</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={role}
-                label="Role"
-                name="role"
-                onChange={handleChange}
-              >
-                <MenuItem value={"Doctor"}>Docteur</MenuItem>
-                <MenuItem value={"Patient"}>Patient</MenuItem>
-              </Select>
-            </FormControl>
           </Grid>
         </Grid>
       </Box>
