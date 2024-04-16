@@ -36,15 +36,7 @@ export default function PatientCard({
   patientName,
   doctorName,
 }) {
-  if (!slot || !slot.startTime || !slot.endTime) {
-    return (
-      <Card sx={{ position: "relative", borderRadius: "20px", boxShadow: 3, background: "#0573E3" }}>
-        <CardContent>
-          <Typography sx={styles.typo}>Slot information is unavailable.</Typography>
-        </CardContent>
-      </Card>
-    );
-  }
+  if (slot && slot.startTime && slot.endTime) {
 
   return (
     <Card
@@ -70,19 +62,19 @@ export default function PatientCard({
           Nom du médecin: {doctorName}
         </Typography>
         <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom>
-          Your Query: {question}
+          Votre bobo: {question}
         </Typography>
         <Typography sx={[styles.typo, { fontSize: "18px" }]}>
-          Doctor's Reply:
+          Réponse du docteur:
         </Typography>
         {answer === null ? (
           <Typography sx={[styles.typo2, { color: "red" }]}>
-            Not Responded By Doctor Yet
+            Pas encore de réponse
           </Typography>
         ) : (
           <Typography sx={styles.typo2}>{answer}</Typography>
         )}
       </CardContent>
     </Card>
-  );
+  );}
 }

@@ -120,6 +120,7 @@ router.get("/getBookedAppointmentsPatients", async (req, res) => {
   }
 });
 router.put("/updateAppointment/:id", async (req, res) => {
+  console.log(req.path);
   const { id } = req.params;
   const { prescription } = req.body;
 

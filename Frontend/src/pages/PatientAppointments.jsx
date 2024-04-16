@@ -3,6 +3,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import PatientCard from "../Components/PatientCard";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import { styles } from "../css/doctobo.styles";
 
 const PatientAppointments = () => {
   const [appoints, setAppoints] = useState([]);
@@ -33,7 +34,7 @@ const PatientAppointments = () => {
   }, []);
 
   return (
-    <Box sx={{ margin: "auto", maxWidth: 1200 }}>
+    <Box sx={styles.main}>
       <Typography variant="h4" sx={{ mb: 4 }}>
         Mes Rendez-vous
       </Typography>
@@ -42,7 +43,7 @@ const PatientAppointments = () => {
         const slot = typeof item.appointmentTime === 'string' ? JSON.parse(item.appointmentTime) : item.appointmentTime;
 
         return (
-          <Grid item lg={6} xl={4} md={6} sm={12} xs={12} key={index}>
+          <Grid item lg={6} xl={6} md={8} sm={12} xs={12} key={index}>
             <PatientCard
               slot={slot}
               question={item.patientQuery}
