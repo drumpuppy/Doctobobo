@@ -136,6 +136,7 @@ const [times, setTimes] = React.useState(() => {
         </Typography>
         <Typography color="white">Description : {data?.description}</Typography>
         <Typography color="white">Adresse : {data?.adresse}</Typography>
+        <Typography color="white">Code postal : {data?.code_postal}</Typography>
         <Box>
           <Typography
             sx={{
