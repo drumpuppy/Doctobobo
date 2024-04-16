@@ -15,42 +15,25 @@ const Doctors = ({ search, searchPostalCode }) => {
   const { userData, user } = useContext(AuthContext);
   
   const getAllDoctors = async () => {
-    const response = await fetch("http://localhost:5000/Medecin/Medecin", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const responseData = await response.json();
+    try {
+      const response = await fetch("http://localhost:5000/Medecin/Medecin", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = await response.json();
 
- 
-
-
-    let filteredDoctors = responseData.medicines[0];
-    
-    // Filtrer en fonction du code postal
-    if (searchPostalCode) {
-      filteredDoctors = filteredDoctors.filter(doc =>
-        doc.codePostal.toLowerCase().includes(searchPostalCode.toLowerCase())
-      );
+      setDocs(responseData.medicines[0]);
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
     }
-
-    // Filtrer en fonction du nom/spécialité
-    filteredDoctors = filteredDoctors.filter(doc =>
-      doc.Specialite.toLowerCase().includes(search.toLowerCase()) ||
-      doc.Nom_Medecin.toLowerCase().includes(search.toLowerCase())
-    );
-
-    setDocs(filteredDoctors);
   };
-
-
-
-
 
   const handleDate = (e) => {
     setSelectedDate(e.target.value);
   };
+
   const addAppointment = async (docId, docName) => {
     if (user) {
       if (userData.role === "patient") {
@@ -96,10 +79,24 @@ const Doctors = ({ search, searchPostalCode }) => {
       toast.error("Vous n'êtes pas connecté à votre compte. Merci de vous connecter.");
     }
   };
-  console.log(userData);
+
   useEffect(() => {
     getAllDoctors();
-  },[search, searchPostalCode]);
+  }, []);
+
+  // Filtrer les médecins en fonction de la recherche et du code postal
+  const filteredDoctors = docs.filter(doc => {
+    const searchLower = search.toLowerCase();
+    const searchPostalLower = searchPostalCode.toLowerCase();
+    const docSpecialiteLower = doc.Specialite.toLowerCase();
+    const docNomLower = doc.Nom_Medecin.toLowerCase();
+    const docPostalLower = doc.code_postal ? doc.code_postal.toLowerCase() : ""; // Assurez-vous que le nom de la propriété est correct
+
+    return (
+      (docSpecialiteLower.includes(searchLower) || docNomLower.includes(searchLower)) &&
+      (searchPostalCode === "" || docPostalLower.includes(searchPostalLower))
+    );
+  });
 
   return (
     <Box sx={{ ...styles.main, backgroundImage: `url(${steImage})` }}>
@@ -114,32 +111,20 @@ const Doctors = ({ search, searchPostalCode }) => {
             flexWrap="wrap"
             justifyContent={"center"}
           >
-            {docs &&
-              docs?.length > 0 &&
-              docs
-                ?.filter(
-                  (doc) =>
-                    doc.Specialite.toLowerCase().includes(
-                      search.toLowerCase()
-                    ) ||
-                    doc.Nom_Medecin.toLowerCase().includes(search.toLowerCase())
-                )
-                .map((item, index) => {
-                  return (
-                    <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
-                      <DoctorCard
-                        data={item}
-                        handleDate={handleDate}
-                        selectedTime={selectedTime}
-                        setSelectedTime={setSelectedTime}
-                        setSelectedTimeItem={setSelectedTimeItem}
-                        addAppointment={addAppointment}
-                        setpatientQuery={setpatientQuery}
-                        selectedDate={selectedDate}
-                      />
-                    </Grid>
-                  );
-                })}
+            {filteredDoctors.map((item, index) => (
+              <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
+                <DoctorCard
+                  data={item}
+                  handleDate={handleDate}
+                  selectedTime={selectedTime}
+                  setSelectedTime={setSelectedTime}
+                  setSelectedTimeItem={setSelectedTimeItem}
+                  addAppointment={addAppointment}
+                  setpatientQuery={setpatientQuery}
+                  selectedDate={selectedDate}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Container>
