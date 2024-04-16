@@ -20,20 +20,35 @@ const bull = (
 function DoctorCard({
   data,
   handleDate,
-  selectedTime,
+  selectedTime ,
   setSelectedTime,
   setSelectedTimeItem,
   addAppointment,
   setpatientQuery,
   selectedDate,
 }) {
-  const [times, setTimes] = React.useState(
-    data?.availableTime
-      ? JSON.parse(data.availableTime).filter(
-          (dates) => dates?.isSelected == true
-        )
-      : []
-  );
+
+  const safeJsonParse = (json, defaultValue = []) => {
+    if (!json) return defaultValue;
+    if (typeof json === 'object') return json;
+    try {
+        return JSON.parse(json);
+    } catch (error) {
+        console.error("Failed to parse JSON:", error);
+        return defaultValue;
+    }
+};
+
+  
+  
+const [times, setTimes] = React.useState(() => {
+  const parsedTimes = safeJsonParse(data.availableTime);
+  return Array.isArray(parsedTimes) ? parsedTimes.filter(date => date?.isSelected) : [];
+});
+
+  
+  
+  
   const [reservedTimings, setReservedTimings] = React.useState(null);
   const handleSelect = (index, item) => {
     setSelectedTime(index);
@@ -154,27 +169,19 @@ function DoctorCard({
         </Box>
         <Grid container>
           {times?.map((item, index) => {
-            const isReserved =
-              reservedTimings &&
-              reservedTimings.length > 0 &&
-              reservedTimings.some((reservedTime) => {
-                const parsedAppointmentTime = JSON.parse(
-                  reservedTime.appointmentTime
-                );
-                return (
-                  parsedAppointmentTime.startTime === item.startTime &&
-                  parsedAppointmentTime.endTime === item.endTime
-                );
-              });
+            const isReserved = reservedTimings && reservedTimings.length > 0 && reservedTimings.some(reservedTime => {
+              const parsedAppointmentTime = safeJsonParse(reservedTime.appointmentTime);
+              return parsedAppointmentTime && parsedAppointmentTime.startTime === item.startTime && parsedAppointmentTime.endTime === item.endTime;
+            });
+            if (!item) return null; // Check for null items
             return (
               <Grid item lg={6}>
                 <Chip
                   sx={{
                     margin: "5px",
                     boxShadow: 1,
-                    backgroundColor:
-                      selectedTime === index ? "#2196f3" : "#378CE7", // Blue background for selected chips
-                    color: selectedTime === index ? "#fff" : "white", // White text for selected chips
+                    backgroundColor: selectedTime === index ? "#2196f3" : "#378CE7",
+                    color: selectedTime === index ? "#fff" : "white",
                   }}
                   key={index}
                   label={`${item.startTime} to ${item.endTime}`}

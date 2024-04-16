@@ -25,8 +25,19 @@ CREATE TABLE IF NOT EXISTS doctobobo.Medecin (
         description TEXT,
         availableTime JSON DEFAULT NULL
       );
+      
+CREATE TABLE IF NOT EXISTS  doctobobo.bookedAppointment (
+          idAppointment VARCHAR(255) PRIMARY KEY,
+          idPatient VARCHAR(255) NOT NULL,
+          idDoctor VARCHAR(255) NOT NULL,
+          appointmentDate VARCHAR(255) NOT NULL,
+          appointmentTime JSON NOT NULL,
+          patientQuery TEXT,
+          prescription VARCHAR(255) DEFAULT NULL,
+          patientName VARCHAR(255) NOT NULL,
+          doctorName VARCHAR(255) NOT NULL
+        );
 
--- Assume the Medecin table has been created as per your Node.js setup script
 
 INSERT INTO doctobobo.Medecin (idMedecin, Nom_Medecin, Prenom_Medecin, DateNaissance, Specialite, email, password, adresse, code_postal, description) VALUES
 ('id1', 'Dupont', 'Jean', '1975-02-15', 'Cardiologie', 'jean.dupont@email.com', 'password_hash', '123 rue de Paris', '75001', 'Cardiologue expérimenté'),

@@ -1,0 +1,16 @@
+{
+    "name": "projetjs",
+    "version": "1.0.0",
+    "description": "doctolib like",
+    "main": "Backend/server.js",
+    "scripts": {
+        "build": "cd Frontend && npm install && npm run build && cd ../Backend && npm install",
+        "start": "node Backend/server.js"
+    },
+    "author": "LEA",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
+  

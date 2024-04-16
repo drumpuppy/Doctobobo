@@ -1,56 +1,60 @@
 import React, { useContext, useEffect, useState } from "react";
-import { styles } from "../css/doctobo.styles";
 import { Box, Grid, Typography } from "@mui/material";
-import AppointmentCard from "../Components/AppointmentCard";
+import PatientCard from "../Components/PatientCard";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
-import PatientCard from "../Components/PatientCard";
+
 const PatientAppointments = () => {
   const [appoints, setAppoints] = useState([]);
   const { userData } = useContext(AuthContext);
+
   const getAppoints = async () => {
-    console.log(userData);
     try {
       const response = await fetch(
         `http://localhost:5000/book/getBookedAppointmentsPatients?id=${userData.user.idPatient}`
       );
 
-      const resp = await response.json();
-      console.log(resp.appointments[0], "resp");
-      setAppoints(resp.appointments[0]);
+      if (response.ok) {
+        const resp = await response.json();
+        console.log("Appointments fetched:", resp.appointments);
+        setAppoints(resp.appointments.flat());
+      } else {
+        toast.error('Failed to fetch appointments');
+        console.error("Error fetching appointments:", await response.text());
+      }
     } catch (error) {
-      console.log("errors");
+      toast.error('Network or server error');
+      console.error("Error fetching appointments:", error);
     }
   };
 
   useEffect(() => {
     getAppoints();
   }, []);
+
   return (
-    <Box sx={styles.main}>
-      <Box sx={styles.typo}>
-        <Typography sx={styles.font}>Mes Rendez-vous</Typography>
-      </Box>
-      <Box sx={styles.gridBox}>
-        <Grid container columnSpacing={3} rowSpacing={3}>
-          {appoints &&
-            appoints?.length > 0 &&
-            appoints?.map((item, index) => {
-              return (
-                <Grid item lg={6} xl={4} md={6} sm={12} xs={12} key={index}>
-                  <PatientCard
-                    slot={JSON.parse(item.appointmentTime)}
-                    question={item.patientQuery}
-                    answer={item.prescription}
-                    date={item.appointmentDate}
-                    patientName={item.patientName}
-                    doctorName={item.doctorName}
-                  />
-                </Grid>
-              );
-            })}
-        </Grid>
-      </Box>
+    <Box sx={{ margin: "auto", maxWidth: 1200 }}>
+      <Typography variant="h4" sx={{ mb: 4 }}>
+        Mes Rendez-vous
+      </Typography>
+      <Grid container spacing={2}>
+      {appoints.map((item, index) => {
+        const slot = typeof item.appointmentTime === 'string' ? JSON.parse(item.appointmentTime) : item.appointmentTime;
+
+        return (
+          <Grid item lg={6} xl={4} md={6} sm={12} xs={12} key={index}>
+            <PatientCard
+              slot={slot}
+              question={item.patientQuery}
+              answer={item.prescription}
+              date={item.appointmentDate}
+              patientName={item.patientName}
+              doctorName={item.doctorName}
+            />
+          </Grid>
+        );
+      })}
+      </Grid>
     </Box>
   );
 };
