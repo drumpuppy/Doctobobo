@@ -82,3 +82,9 @@ INSERT INTO doctobobo.Medecin (idMedecin, Nom_Medecin, Prenom_Medecin, DateNaiss
 ('id38', 'Mercier', 'Denise', '1988-05-22', 'Radiologie', 'denise.mercier@email.com', 'password_hash', '160 rue de Nancy', '54000', 'Radiologue expérimentée en mammographie'),
 ('id39', 'Dupuis', 'Antoine', '1979-04-09', 'Cardiologie', 'antoine.dupuis@email.com', 'password_hash', '161 rue de Roubaix', '59100', 'Cardiologue, expert en échocardiographie'),
 ('id40', 'Vasseur', 'Louise', '1994-12-03', 'Dermatologie', 'louise.vasseur@email.com', 'password_hash', '162 rue de Béziers', '34500', 'Dermatologue intéressée par la dermatologie esthétique');
+
+ALTER TABLE doctobobo.User
+ADD COLUMN accepted_cgu BOOLEAN DEFAULT false;
+
+ALTER TABLE doctobobo.Medecin
+ADD COLUMN accepted_cgu BOOLEAN DEFAULT false;

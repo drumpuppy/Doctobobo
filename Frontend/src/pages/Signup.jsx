@@ -8,13 +8,14 @@ import {
   Box,
   Button,
   FormControl,
+  FormControlLabel,
   Grid,
+  Radio,
   TextField,
   Typography,
 } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-
 import Select from "@mui/material/Select";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +35,7 @@ const Signup = () => {
   };
   const [role, setRole] = React.useState("patient");
   const [formData, setFormData] = useState(initialFormData);
+  const [cguAccepted, setCguAccepted] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setRole(e.target.value);
@@ -77,6 +79,10 @@ const Signup = () => {
       toast.error("Merci de remplir tous les champs");
       return;
     }
+    if (!cguAccepted) {
+      toast.error("Veuillez accepter les Conditions Générales d'Utilisation");
+      return;
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Validate email format
@@ -113,6 +119,7 @@ const Signup = () => {
         code_postal,
         Specialite,
         description,
+        cguAccepted,
       }),
     });
     const responseData = await response.json();
@@ -168,7 +175,7 @@ const Signup = () => {
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer
+              <DemoContainer
                 components={["DatePicker"]}
                 sx={{
                   ".MuiTextField-root": {
@@ -185,21 +192,6 @@ const Signup = () => {
                 />
               </DemoContainer>
             </LocalizationProvider>
-            {/* <input
-              type="date"
-              name="DateNaissance"
-              value={formData.DateNaissance}
-              onChange={handleForm}
-              style={{
-                width: "100%",
-                padding: "16px 0px",
-                borderRadius: "5px",
-                border: "1px solid #ced4da",
-                outline: "none",
-
-                fontSize: "16px",
-              }}
-            /> */}
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <TextField
@@ -282,6 +274,25 @@ const Signup = () => {
           ) : (
             ""
           )}
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <FormControlLabel
+              control={
+                <Radio
+                  checked={cguAccepted}
+                  onChange={(e) => setCguAccepted(e.target.checked)}
+                  value="oui"
+                  name="cgu"
+                  inputProps={{ 'aria-label': 'A' }}
+                />
+              }
+              label="J'accepte les Conditions Générales d'Utilisation"
+            />
+            <Typography sx={{ mt: 1 }}>
+              <a href={`${process.env.PUBLIC_URL}/CGU doctobobo.pdf`} download="Conditions_Generales_d_Utilisation.pdf" style={{ textDecoration: 'none' }}>
+                Télécharger les CGU
+              </a>
+            </Typography>
+          </Grid>
         </Grid>
 
         <Button sx={styles.btn} onClick={handleSubmit}>

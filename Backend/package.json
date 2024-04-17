@@ -23,5 +23,6 @@
     "nanoid": "^5.0.6",
     "nodemon": "^3.1.0"
   },
+  "devDependencies": {},
   "description": ""
 }
