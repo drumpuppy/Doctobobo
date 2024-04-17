@@ -38,6 +38,12 @@ export default function PatientCard({
 }) {
   if (slot && slot.startTime && slot.endTime) {
 
+  const fileUrl = (fileName) => {
+    const bucketName = 'doctobobo';
+    return `https://${bucketName}.s3.amazonaws.com/${fileName}`;
+  };
+  
+
   return (
     <Card
       sx={{
@@ -74,6 +80,9 @@ export default function PatientCard({
         ) : (
           <Typography sx={styles.typo2}>{answer}</Typography>
         )}
+        <div>
+            {fileUrl && <a href={fileUrl} target="_blank" rel="noopener noreferrer">Download File</a>}
+        </div>
       </CardContent>
     </Card>
   );}
