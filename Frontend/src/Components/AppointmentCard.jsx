@@ -24,6 +24,7 @@ export default function AppointmentCard({
   question,
   answer,
   onUpdate,
+  date,
   patientName,
   doctorName,
 }) {
@@ -67,7 +68,7 @@ export default function AppointmentCard({
       <Box sx={styles.absoluteBox}></Box>
       <CardContent>
         <Typography sx={[styles.typo, { color: "white", fontWeight: 600 }]} gutterBottom>
-          Date: {`de ${slot.startTime} à ${slot.endTime}`}
+          Date : {date}
         </Typography>
         <Typography sx={[styles.typo, { color: "white", fontWeight: 600 }]} gutterBottom>
           Créneau: {`de ${slot.startTime} à ${slot.endTime}`}
