@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const [cookiesAccepted, setCookiesAccepted] = useState(false);
   let initialFormData = {
     role: "patient",
     Nom: "",
@@ -83,6 +84,11 @@ const Signup = () => {
       toast.error("Veuillez accepter les Conditions Générales d'Utilisation");
       return;
     }
+    if (!cookiesAccepted) {
+      toast.error("Veuillez accepter les cookies pour continuer.");
+      return;
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Validate email format
@@ -292,6 +298,18 @@ const Signup = () => {
                 Télécharger les CGU
               </a>
             </Typography>
+            <FormControlLabel
+              control={
+                <Radio
+                  checked={cookiesAccepted}
+                  onChange={(e) => setCookiesAccepted(e.target.checked)}
+                  value="oui"
+                  name="cookies"
+                />
+              }
+              label="J'accepte l'utilisation des cookies"
+            />
+
           </Grid>
         </Grid>
 
