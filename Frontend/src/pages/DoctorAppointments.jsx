@@ -98,6 +98,7 @@ const DoctorAppointments = () => {
                 answer={item.prescription}
                 id={item.idAppointment}
                 onUpdate={updateAppointmentPrescription}
+                date={item.appointmentDate}
                 patientName={item.patientName}
                 doctorName={item.doctorName}
               />
