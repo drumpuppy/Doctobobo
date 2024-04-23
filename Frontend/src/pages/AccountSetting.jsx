@@ -128,6 +128,9 @@ const AccountSetting = () => {
               fullWidth
             />
           </Grid>
+          
+
+
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <TextField
               id="outlined-basic"
@@ -176,6 +179,20 @@ const AccountSetting = () => {
               fullWidth
             />
           </Grid>
+
+      {/* Ajout du bouton de téléchargement des CGU */}
+      <Grid item lg={12} md={12} sm={12} xs={12}>
+        <Button
+          variant="contained"
+          color="primary"
+          href={`${process.env.PUBLIC_URL}/CGU doctobobo.pdf`} // Utilisez le nom exact du fichier dans le dossier public
+          download="CGU_doctobobo.pdf"
+          sx={{ marginTop: 2 }}  // Vous pouvez ajuster le style selon vos besoins
+        >
+          Télécharger les CGU
+        </Button>
+      </Grid>
+
         </Grid>
       </Box>
       <Box sx={styles.btnCont}>
