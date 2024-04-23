@@ -45,6 +45,7 @@ const PatientAppointments = () => {
         return (
           <Grid item lg={6} xl={6} md={8} sm={12} xs={12} key={index}>
             <PatientCard
+              id={item.idAppointment}
               slot={slot}
               question={item.patientQuery}
               answer={item.prescription}

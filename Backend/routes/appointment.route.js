@@ -201,4 +201,45 @@ router.delete('/delete/:appointmentId/:filename', async (req, res) => {
     }
 });
 
+router.get('/files/:appointmentId', async (req, res) => {
+  const { appointmentId } = req.params;
+  const params = {
+      Bucket: process.env.AWS_S3_BUCKET,
+      Prefix: `appointments/${appointmentId}/`
+  };
+
+  try {
+      const s3Data = await s3.listObjectsV2(params).promise();
+      const files = s3Data.Contents.map(file => ({
+          name: file.Key.split('/').pop(),
+          url: `https://${process.env.AWS_S3_BUCKET}.s3.amazonaws.com/${file.Key}`,
+          lastModified: file.LastModified,
+          size: file.Size
+      }));
+      res.json({ files });
+  } catch (err) {
+      console.error('Error listing files:', err);
+      res.status(500).send('Failed to list files.');
+  }
+});
+
+router.get('/download/:appointmentId/:filename', async (req, res) => {
+  const { appointmentId, filename } = req.params;
+  const params = {
+      Bucket: process.env.AWS_S3_BUCKET,
+      Key: `appointments/${appointmentId}/${filename}`,
+      Expires: 60 // The URL will expire in 60 seconds
+  };
+
+  try {
+      const signedUrl = s3.getSignedUrl('getObject', params);
+      res.json({ url: signedUrl });
+  } catch (err) {
+      console.error('Error generating signed URL:', err);
+      res.status(500).send('Failed to generate signed URL.');
+  }
+});
+
+
+
 module.exports = router;

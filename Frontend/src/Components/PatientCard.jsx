@@ -1,8 +1,6 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Box, Card, CardContent, Button, Typography, Grid } from '@mui/material';
 
 const styles = {
   typo: {
@@ -10,11 +8,19 @@ const styles = {
     fontSize: "20px",
     color: "white",
   },
-  typo2: {
-    fontFamily: "'Poppins'",
-    fontSize: "20px",
-    marginTop: "5px",
-    fontWeight: 600,
+  fileUploadBtn: {
+    background: "#fff",
+    color: "#0573E3",
+    '&:hover': {
+      background: "#ccc",
+    }
+  },
+  fileDeleteBtn: {
+    background: "red",
+    color: "#fff",
+    '&:hover': {
+      background: "darkred",
+    }
   },
   absoluteBox: {
     background: "#02298A",
@@ -29,61 +35,105 @@ const styles = {
 };
 
 export default function PatientCard({
+  id,
   slot,
   question,
   answer,
   date,
   patientName,
-  doctorName,
+  doctorName
 }) {
-  if (slot && slot.startTime && slot.endTime) {
+  const [files, setFiles] = useState([]);
 
-  const fileUrl = (fileName) => {
-    const bucketName = 'doctobobo';
-    return `https://${bucketName}.s3.amazonaws.com/${fileName}`;
+  useEffect(() => {
+    if (id) {
+      fetchFiles();
+    }
+  }, [id]); // Dependency on `id`
+  
+
+  const fetchFiles = async () => {
+    if (id) { // Ensure `id` is not undefined
+      try {
+        const response = await axios.get(`http://localhost:5000/book/files/${id}`);
+        if (response.status === 200) {
+          setFiles(response.data.files);
+        } else {
+          console.error('Error with status code:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching files:', error);
+      }
+    } else {
+      console.error('Appointment ID is undefined');
+    }
   };
   
 
-  return (
-    <Card
-      sx={{
-        position: "relative",
-        borderRadius: "20px",
-        boxShadow: 3,
-        background: "#0573E3",
-      }}
-    >
-      <Box sx={styles.absoluteBox}></Box>
-      <CardContent>
-        <Typography sx={[styles.typo, { fontWeight: 600 }]} gutterBottom>
-          Date: {date}
-        </Typography>
-        <Typography sx={[styles.typo, { fontWeight: 600 }]} gutterBottom>
-          Créneau: {`${slot.startTime} to ${slot.endTime}`}
-        </Typography>
-        <Typography sx={styles.typo} gutterBottom>
-          Nom du patient: {patientName}
-        </Typography>
-        <Typography sx={styles.typo} gutterBottom>
-          Nom du médecin: {doctorName}
-        </Typography>
-        <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom>
-          Votre bobo: {question}
-        </Typography>
-        <Typography sx={[styles.typo, { fontSize: "18px" }]}>
-          Réponse du docteur:
-        </Typography>
-        {answer === null ? (
-          <Typography sx={[styles.typo2, { color: "red" }]}>
-            Pas encore de réponse
-          </Typography>
-        ) : (
-          <Typography sx={styles.typo2}>{answer}</Typography>
-        )}
-        <div>
-            {fileUrl && <a href={fileUrl} target="_blank" rel="noopener noreferrer">Download File</a>}
-        </div>
-      </CardContent>
-    </Card>
-  );}
+  const handleFileUpload = async (file) => {
+    console.log('Uploading file for appointment ID:', id); // Debugging log
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await axios.post(`http://localhost:5000/book/upload/${id}`, formData);
+      console.log('File uploaded, server response:', response); // Debugging log
+      fetchFiles(); // Refresh file list after upload
+    } catch (error) {
+      console.error('Upload error:', error);
+    }
+  };
+
+  const downloadFile = async (fileName) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/book/download/${id}/${fileName}`);
+      const signedUrl = response.data.url;
+      window.open(signedUrl, '_blank');
+    } catch (error) {
+      console.error('Download error:', error);
+    }
+  };
+  
+
+
+  if (slot && slot.startTime && slot.endTime) {
+
+    return (
+      <Card sx={{ position: "relative", borderRadius: "20px", boxShadow: 3, background: "#0573E3" }}>
+        <Box sx={styles.absoluteBox}></Box>
+        <CardContent>
+          <Typography sx={[styles.typo, { fontWeight: 600 }]} gutterBottom>Date: {date}</Typography>
+          <Typography sx={[styles.typo, { fontWeight: 600 }]} gutterBottom>Créneau: {slot && slot.startTime && slot.endTime ? `${slot.startTime} to ${slot.endTime}` : 'Time not available'}</Typography>
+          <Typography sx={styles.typo} gutterBottom>Nom du patient: {patientName}</Typography>
+          <Typography sx={styles.typo} gutterBottom>Nom du médecin: {doctorName}</Typography>
+          <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom>Your issue: {question}</Typography>
+          {answer === null ? (
+            <Typography sx={[styles.typo, { color: "red" }]}>No response yet</Typography>
+          ) : (
+            <Typography sx={styles.typo}>{answer}</Typography>
+          )}
+          <input
+            type="file"
+            onChange={(e) => handleFileUpload(e.target.files[0])}
+            style={{ display: 'none' }}
+            id={`file-upload-${id}`}
+          />
+          <label htmlFor={`file-upload-${id}`}>
+            <Button sx={styles.fileUploadBtn} component="span">
+              Upload File
+            </Button>
+          </label>
+          {files.map(file => (
+            <Grid key={file.name} container sx={styles.fileItemContainer}>
+              <Typography>{file.name}</Typography>
+              <div>
+                <Button onClick={() => downloadFile(file.name)}>Download</Button>
+              </div>
+            </Grid>
+          ))}
+        </CardContent>
+      </Card>
+    );
+  }
 }
