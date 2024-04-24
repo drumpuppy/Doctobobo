@@ -143,7 +143,7 @@ export default function AppointmentCard({
         <input type="file" onChange={handleFileChange} style={{ display: 'none' }} id="file-upload"/>
         <label htmlFor="file-upload">
           <Button variant="contained" component="span" sx={styles.fileUploadBtn}>
-            Upload File
+            Déposer un fichier
           </Button>
         </label>
         {files.map(file => (
@@ -152,7 +152,7 @@ export default function AppointmentCard({
               <Typography>{file.name}</Typography>
             </Grid>
             <Grid item xs={4}>
-              <Button onClick={() => deleteFile(file.name)} sx={styles.fileDeleteBtn}>Delete</Button>
+              <Button onClick={() => deleteFile(file.name)} sx={styles.fileDeleteBtn}>Supprimer</Button>
             </Grid>
           </Grid>
         ))}

@@ -121,15 +121,17 @@ export default function PatientCard({
           />
           <label htmlFor={`file-upload-${id}`}>
             <Button sx={styles.fileUploadBtn} component="span">
-              Upload File
+              Déposer un fichier
             </Button>
           </label>
           {files.map(file => (
-            <Grid key={file.name} container sx={styles.fileItemContainer}>
+            <Grid container key={file.name} sx={{ alignItems: 'center', marginTop: '10px' }}>
+              <Grid item xs={8}>
               <Typography>{file.name}</Typography>
-              <div>
-                <Button onClick={() => downloadFile(file.name)}>Download</Button>
-              </div>
+              </Grid>
+              <Grid item xs={4}>
+                <Button sx={styles.fileUploadBtn} onClick={() => downloadFile(file.name)}>Télécharger</Button>
+              </Grid>
             </Grid>
           ))}
         </CardContent>

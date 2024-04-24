@@ -4,7 +4,7 @@ const config = {
   db: {
     host: "localhost",
     user: "root",
-    password: "mysql",
+    password: "Mysql12!",
     database: "doctobobo",
     connectTimeout: 60000
   },
