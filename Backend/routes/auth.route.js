@@ -9,16 +9,11 @@ const { db } = global;
 
 async function checkUserTableExists() {
   try {
-    const tableCheckQuery = `SELECT EXISTS (
-      SELECT 1
-      FROM INFORMATION_SCHEMA.TABLES
-      WHERE TABLE_NAME = 'User'
-  ) AS table_exists;`;
-    const result = await db.query(tableCheckQuery);
-
-    return result[0][0].table_exists === 1;
+    const query = 'SELECT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = ?) AS table_exists';
+    const result = await db.execute(query, ['User']);
+    return result[0].table_exists === 1;
   } catch (error) {
-    console.error("Error checking if table exists:", error);
+    console.error('Error checking if User table exists:', error);
     return false;
   }
 }
@@ -26,23 +21,19 @@ async function checkUserTableExists() {
 // Function to check if the Medecin table exists
 async function checkMedecinTableExists() {
   try {
-    const tableCheckQuery = `SELECT EXISTS (
-      SELECT 1
-      FROM INFORMATION_SCHEMA.TABLES
-      WHERE TABLE_NAME = 'Medecin'
-  ) AS table_exists;`;
-    const result = await db.query(tableCheckQuery);
+    const query = 'SELECT EXISTS(SELECT * FROM information_schema.tables WHERE table_name = ? AND table_schema = ?) as table_exists';
+    const result = await db.query(query, ['Medecin', process.env.MYSQL_DATABASE]);
     return result[0][0].table_exists === 1;
   } catch (error) {
-    console.error("Error checking if Medecin table exists:", error);
+    console.error('Error checking if Medecin table exists:', error);
     return false;
   }
 }
+
 // Function to create the User table if it doesn't exist
 async function createUserTableIfNotExists() {
-  // console.log("createTableQuery");
   try {
-    const createTableQuery = `
+    const query = `
       CREATE TABLE IF NOT EXISTS User (
         idPatient VARCHAR(255) PRIMARY KEY,
         Nom_Patient VARCHAR(255) NOT NULL,
@@ -54,7 +45,7 @@ async function createUserTableIfNotExists() {
         code_postal VARCHAR(255) NOT NULL
       )
     `;
-    await db.query(createTableQuery);
+    await db.query(query);
     console.log("User table created or already exists");
     return true;
   } catch (error) {
@@ -104,11 +95,12 @@ router.use(async (req, res, next) => {
       await createMedecinTableIfNotExists();
     }
   } catch (err) {
-    console.log(err);
+    console.error("Error creating tables:", err);
   } finally {
     next();
   }
 });
+
 
 router.post("/signup", async (req, res) => {
   const {
@@ -128,10 +120,10 @@ router.post("/signup", async (req, res) => {
     const { nanoid } = await import("nanoid");
     createUserTableIfNotExists();
     createMedecinTableIfNotExists();
-    if (role == "patient") {
+    if (role === "patient") {
       // Check if user with provided email already exists
-      const findUserQuery = `SELECT * FROM User WHERE email = '${email}'`;
-      const existingUser = (await db.query(findUserQuery))[0][0];
+      const findUserQuery = "SELECT * FROM User WHERE email = ?";
+      const existingUser = (await db.query(findUserQuery, [email]))[0][0];
       if (existingUser) {
         return res
           .status(400)
@@ -142,14 +134,24 @@ router.post("/signup", async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
       // Use dynamic import to import nanoid
       const id = nanoid(); // Generate unique ID
-      const addUserQuery = `INSERT INTO User (idPatient, Nom_Patient, Prenom_Patient, DateNaissance, email, password, adresse, code_postal) VALUES ('${id}','${Nom}','${Prenom}','${DateNaissanceFormatted}','${email}','${hashedPassword}','${adresse}','${code_postal}')`;
-      await db.query(addUserQuery);
+      const addUserQuery =
+        "INSERT INTO User (idPatient, Nom_Patient, Prenom_Patient, DateNaissance, email, password, adresse, code_postal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      await db.query(addUserQuery, [
+        id,
+        Nom,
+        Prenom,
+        DateNaissanceFormatted,
+        email,
+        hashedPassword,
+        adresse,
+        code_postal,
+      ]);
       return res
         .status(200)
         .send({ message: "User created successfully", status: true });
     } else {
-      const findUserQuery = `SELECT * FROM Medecin WHERE email = '${email}'`;
-      const existingUser = (await db.query(findUserQuery))[0][0];
+      const findUserQuery = "SELECT * FROM Medecin WHERE email = ?";
+      const existingUser = (await db.query(findUserQuery, [email]))[0][0];
       if (existingUser) {
         return res
           .status(400)
@@ -157,11 +159,20 @@ router.post("/signup", async (req, res) => {
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       const idMedecin = nanoid(); // Generate unique doctor ID
-      const addMedecinQuery = `
-        INSERT INTO Medecin (idMedecin, Nom_Medecin, Prenom_Medecin, DateNaissance, Specialite, email, password, adresse, code_postal, description)
-        VALUES ('${idMedecin}', '${Nom}', '${Prenom}', '${DateNaissanceFormatted}', '${Specialite}', '${email}', '${hashedPassword}', '${adresse}', '${code_postal}', '${description}')
-        `;
-      await db.query(addMedecinQuery);
+      const addMedecinQuery =
+        "INSERT INTO Medecin (idMedecin, Nom_Medecin, Prenom_Medecin, DateNaissance, Specialite, email, password, adresse, code_postal, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      await db.query(addMedecinQuery, [
+        idMedecin,
+        Nom,
+        Prenom,
+        DateNaissanceFormatted,
+        Specialite,
+        email,
+        hashedPassword,
+        adresse,
+        code_postal,
+        description,
+      ]);
       return res
         .status(200)
         .send({ message: "User created successfully", status: true });
@@ -172,16 +183,17 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+
 router.post("/login", async (req, res) => {
   const { email, password, role } = req.body;
   try {
     let findUserQuery;
     if (role === "patient") {
-      findUserQuery = `SELECT * FROM User WHERE email = '${email}'`;
+      findUserQuery = "SELECT * FROM User WHERE email = ?";
     } else {
-      findUserQuery = `SELECT * FROM Medecin WHERE email = '${email}'`;
+      findUserQuery = "SELECT * FROM Medecin WHERE email = ?";
     }
-    const user = (await db.query(findUserQuery))[0][0];
+    const user = (await db.query(findUserQuery, [email]))[0][0];
     if (!user)
       return res.status(400).send({ message: "User not exists", status: 404 });
 
@@ -191,11 +203,15 @@ router.post("/login", async (req, res) => {
       return res
         .status(400)
         .send({ message: "Invalid credentials", status: 401 });
-    console.log(user.idPatient);
-    const token = jwt.sign(
-      { user: { id: user.idPatient } },
-      process.env.JWT_SECRET_Key
-    );
+
+    let userId;
+    if (role === "patient") {
+      userId = user.idPatient;
+    } else {
+      userId = user.idMedecin;
+    }
+
+    const token = jwt.sign({ user: { id: userId } }, process.env.JWT_SECRET_Key);
     return res.status(200).send({
       message: "Login successful",
       data: { token, user },

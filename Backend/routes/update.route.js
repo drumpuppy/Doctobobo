@@ -1,33 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const { db } = global;
+
 router.put("/update", async (req, res) => {
-  const { role, Nom, Prenom, email, adresse, code_postal } =
-    req.body;
+  const { role, Nom, Prenom, email, adresse, code_postal } = req.body;
 
   try {
     if (role === "patient") {
       const updateUserQuery = `
           UPDATE User
-          SET Nom_Patient = '${req.body.Nom_Patient}',
-          Prenom_Patient = '${req.body.Prenom_Patient}',
-              email = '${email}',
-              adresse = '${adresse}',
-              code_postal = '${code_postal}'
-          WHERE email = '${email}'
+          SET Nom_Patient = ?,
+              Prenom_Patient = ?,
+              email = ?,
+              adresse = ?,
+              code_postal = ?
+          WHERE email = ?
         `;
-      await db.query(updateUserQuery);
+      await db.query(updateUserQuery, [Nom, Prenom, email, adresse, code_postal, email]);
     } else {
       const updateMedecinQuery = `
           UPDATE Medecin
-          SET Nom_Medecin = '${req.body.Nom_Medecin}',
-              Prenom_Medecin = '${req.body.Prenom_Medecin}',
-              email = '${email}',
-              adresse = '${adresse}',
-              code_postal = '${code_postal}'
-          WHERE email = '${email}'
+          SET Nom_Medecin = ?,
+              Prenom_Medecin = ?,
+              email = ?,
+              adresse = ?,
+              code_postal = ?
+          WHERE email = ?
         `;
-      await db.query(updateMedecinQuery);
+      await db.query(updateMedecinQuery, [Nom, Prenom, email, adresse, code_postal, email]);
     }
 
     return res
@@ -38,15 +38,16 @@ router.put("/update", async (req, res) => {
     return res.status(500).send({ message: "Internal server error" });
   }
 });
+
 router.put("/updateTimeAvailability", async (req, res) => {
   const { email, availableTime } = req.body;
   try {
     const updateMedecinQuery = `
       UPDATE Medecin
-      SET availableTime = '${JSON.stringify(availableTime)}'
-      WHERE email = '${email}'
+      SET availableTime = ?
+      WHERE email = ?
     `;
-    await db.query(updateMedecinQuery);
+    await db.query(updateMedecinQuery, [JSON.stringify(availableTime), email]);
 
     return res.status(200).send({
       message: "Time availability updated successfully",
@@ -57,4 +58,5 @@ router.put("/updateTimeAvailability", async (req, res) => {
     return res.status(500).send({ message: "Internal server error" });
   }
 });
+
 module.exports = router;

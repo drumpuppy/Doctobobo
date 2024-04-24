@@ -18,12 +18,13 @@ const createBookedAppointmentTableIfNotExists = async () => {
         )
       `;
     await db.query(createTableQuery);
-    console.log(" table created or already exists");
+    console.log(" bookedAppointment table created or already exists");
   } catch (error) {
-    console.error("Error creating Medecin table:", error);
+    console.error("Error creating bookedAppointment table:", error);
     return false;
   }
 };
+
 router.post("/addAppointment", async (req, res) => {
   const {
     idPatient,
@@ -45,10 +46,19 @@ router.post("/addAppointment", async (req, res) => {
     // Insert the new appointment into the database
     const insertAppointmentQuery = `
       INSERT INTO bookedAppointment (idAppointment, idPatient, idDoctor, appointmentDate, appointmentTime, patientQuery,patientName,doctorName)
-      VALUES ('${id}', '${idPatient}', '${docId}', '${selectedDate}', '${appointmentTime}', '${patientQuery}','${patientName}','${doctorName}')
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    await db.query(insertAppointmentQuery);
+    await db.query(insertAppointmentQuery, [
+      id,
+      idPatient,
+      docId,
+      selectedDate,
+      appointmentTime,
+      patientQuery,
+      patientName,
+      doctorName,
+    ]);
 
     res
       .status(200)
@@ -58,6 +68,7 @@ router.post("/addAppointment", async (req, res) => {
     res.status(500).send({ message: "Internal server error" });
   }
 });
+
 router.post("/checkDoctorAvailability", async (req, res) => {
   const { id_medecin, date } = req.body;
 
@@ -65,10 +76,10 @@ router.post("/checkDoctorAvailability", async (req, res) => {
     const findAppointmentQuery = `
       SELECT *
       FROM bookedAppointment
-      WHERE idDoctor = '${id_medecin}' AND appointmentDate = '${date}'
+      WHERE idDoctor = ? AND appointmentDate = ?
     `;
 
-    const result = await db.query(findAppointmentQuery);
+    const result = await db.query(findAppointmentQuery, [id_medecin, date]);
     if (result && result.length > 0) {
       const appointment = result[0];
       console.log(result[0], "result");
@@ -90,36 +101,39 @@ router.post("/checkDoctorAvailability", async (req, res) => {
       .send({ message: "Internal server error", appointment: null });
   }
 });
+
 router.get("/getBookedAppointmentsDoctors", async (req, res) => {
   const { id } = req.query;
   try {
     const findAppointmentQuery = `
       SELECT *
       FROM bookedAppointment
-      WHERE idDoctor = '${id}'
+      WHERE idDoctor = ?
     `;
-    const appointments = await db.query(findAppointmentQuery);
+    const appointments = await db.query(findAppointmentQuery, [id]);
     res.status(200).json({ appointments });
   } catch (error) {
     console.error("Error fetching appointments:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 router.get("/getBookedAppointmentsPatients", async (req, res) => {
   const { id } = req.query;
   try {
     const findAppointmentQuery = `
       SELECT *
       FROM bookedAppointment
-      WHERE idPatient = '${id}'
+      WHERE idPatient = ?
     `;
-    const appointments = await db.query(findAppointmentQuery);
+    const appointments = await db.query(findAppointmentQuery, [id]);
     res.status(200).json({ appointments });
   } catch (error) {
     console.error("Error fetching appointments:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 router.put("/updateAppointment/:id", async (req, res) => {
   console.log(req.path);
   const { id } = req.params;
@@ -127,7 +141,7 @@ router.put("/updateAppointment/:id", async (req, res) => {
 
   try {
     const updateAppointmentQuery = `
-      UPDATE bookedappointment
+      UPDATE bookedAppointment
       SET prescription = ?
       WHERE idAppointment = ?
     `;
@@ -139,6 +153,7 @@ router.put("/updateAppointment/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 module.exports = router;
 
 ///////////////////////////// files
@@ -198,7 +213,7 @@ router.delete('/delete/:appointmentId/:filename', async (req, res) => {
     } catch (err) {
         console.error('Delete error:', err);
         res.status(500).send('Failed to delete file.');
-    }
+    } 
 });
 
 router.get('/files/:appointmentId', async (req, res) => {

@@ -26,12 +26,12 @@ router.get("/current-user", async (req, res) => {
     let user;
     if (decoded.user.role === "patient") {
       // Query the database to get patient information
-      const getUserQuery = `SELECT * FROM User WHERE id = '${userId}'`;
-      user = (await db.query(getUserQuery))[0][0];
+      const getUserQuery = 'SELECT * FROM User WHERE id = ?';
+      user = (await db.promise().query(getUserQuery, [userId]))[0][0];
     } else {
       // Query the database to get doctor information
-      const getDoctorQuery = `SELECT * FROM Medecin WHERE idMedecin = '${userId}'`;
-      user = (await db.query(getDoctorQuery))[0][0];
+      const getDoctorQuery = 'SELECT * FROM Medecin WHERE idMedecin = ?';
+      user = (await db.promise().query(getDoctorQuery, [userId]))[0][0];
     }
 
     if (!user) {
