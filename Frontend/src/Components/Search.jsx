@@ -1,146 +1,107 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import { LuSearch } from "react-icons/lu";
 
-
 const Search = ({ handleChange, handleChangePostalCode, search, searchPostalCode }) => {
   return (
-    <>
-      <Box sx={style.main}>
-        <Grid container columnSpacing={5}>
-          <Grid item lg={7} xs={12}>
-            <Box sx={style.searchLeftBox}>
-              <form className="search-box">
-                <button
-                  style={{ background: "none", border: "none", padding: 0 }}
-                >
-                  <span
-                    className="material-symbols-outlined"
-                    style={{
-                      fontSize: "23px",
-                      verticalAlign: "-1px",
-                      color: "#9B9B9B",
-                    }}
-                  >
-                    <LuSearch style={{ marginTop: "5px" }} />
-                  </span>
-                </button>
-                <input
-                  style={{ verticalAlign: "4px", width: "100%" }}
-                  type="search"
-                  name="focus"
-                  placeholder="Chercher un docteur"
-                  id="search-input"
-                  value={search}
-                  onChange={(e) => handleChange(e)}
-                />
-              </form>
-            </Box>
-          </Grid>
-          <Grid item lg={5} xs={12}>
-            <Box sx={style.searchLeftBox}>
-              <form className="search-box">
-                <button
-                  style={{ background: "none", border: "none", padding: 0 }}
-                >
-                  <span
-                    className="material-symbols-outlined"
-                    style={{
-                      fontSize: "23px",
-                      verticalAlign: "-1px",
-                      color: "#9B9B9B",
-                    }}
-                  >
-                    <LuSearch style={{ marginTop: "5px" }} />
-                  </span>
-                </button>
-                <input
-                  style={{ verticalAlign: "4px", width: "100%" }}
-                  type="search"
-                  name="focus"
-                  placeholder="Chercher par code postal"
-                  id="search-input"
-                  value={searchPostalCode}
-                  onChange={(e) => handleChangePostalCode(e)}
-                />
-              </form>
-            </Box>
-          </Grid>
+    <Box sx={style.main}>
+      <Grid container columnSpacing={5}>
+        <Grid item lg={7} xs={12} sx={style.searchBox}>
+          <TextField
+            fullWidth
+            type="search"
+            placeholder="Chercher un docteur"
+            value={search}
+            onChange={(e) => handleChange(e)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton sx={style.iconButton}>
+                    <LuSearch />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+            sx={style.textField}
+          />
         </Grid>
-      </Box>
-    </>
+        <Grid item lg={5} xs={12} sx={style.searchBox}>
+          <TextField
+            fullWidth
+            type="search"
+            placeholder="Chercher par code postal"
+            value={searchPostalCode}
+            onChange={(e) => handleChangePostalCode(e)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton sx={style.iconButton}>
+                    <LuSearch />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+            sx={style.textField}
+          />
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
-
 export default Search;
+
 const style = {
   main: {
     width: "100%",
-    color: "black",
     marginTop: "60px",
   },
-  searchLeftBox: {
-    width: "100%",
+  searchBox: {
     display: "flex",
     justifyContent: { md: "start", xs: "center" },
+    '& .MuiTextField-root': {
+      margin: "8px",
+    },
   },
-  searchRightBox: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+  textField: {
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'white', // Changing the border color
+        borderRadius: '15px', // Border radius for rounded corners
+        borderWidth: '5px',
+      },
+      color: 'white', // Text color
+    },
+    '& .MuiInputLabel-root': {
+      color: 'white', // Label color
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: 'white', // Label color when focused
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'white', // Underline color before focus
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: 'white', // Underline color on hover
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white', // Underline color after focus
+    },
+    '& .MuiOutlinedInput-input': {
+      color: 'white', // Input text color
+    },
+    '& .MuiPlaceholder-root': {
+      color: 'white', // Placeholder text color
+    },
+    '& .MuiInputBase-input::placeholder': {
+      color: 'white', // Placeholder text color
+      opacity: 1,
+    },
   },
-  groupBtn: {
-    color: "#5283E5",
-    background: "white",
-    borderRadius: "30px",
-    paddingY: "10px",
-    paddingX: "16px",
-    fontWeight: 600,
-    fontFamily: "Poppins",
-    fontSize: "13px",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "8px",
-    boxShadow: 2,
-    textTransform: "capitalize",
-    letterSpacing: "0px",
+  iconButton: {
+    color: 'white', // Icon button color
   },
-  addiconBox: {
-    background: "#4F81E5",
-    color: "white",
-    width: "35px",
-    height: "35px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: "100%",
-  },
-  flex: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    gap: "45px",
-    marginX: "40px",
-  },
-  size: {
-    fontSize: "32px",
-    opacity: 0.7,
-  },
-  flexAvatar: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "12px",
-    marginX: "12px",
-  },
-  bold: {
-    fontWeight: 600,
-    fontFamily: "Poppins",
-    fontSize: "14px",
-  },
+  // ... (Other style definitions)
 };
