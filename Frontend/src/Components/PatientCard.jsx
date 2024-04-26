@@ -107,7 +107,7 @@ export default function PatientCard({
           <Typography sx={[styles.typo, { fontWeight: 600 }]} gutterBottom>Créneau: {slot && slot.startTime && slot.endTime ? `${slot.startTime} to ${slot.endTime}` : 'Time not available'}</Typography>
           <Typography sx={styles.typo} gutterBottom>Nom du patient: {patientName}</Typography>
           <Typography sx={styles.typo} gutterBottom>Nom du médecin: {doctorName}</Typography>
-          <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom>Your issue: {question}</Typography>
+          <Typography sx={[styles.typo, { minHeight: "100px" }]} gutterBottom> Votre bobo : {question}</Typography>
           {answer === null ? (
             <Typography sx={[styles.typo, { color: "red" }]}>No response yet</Typography>
           ) : (
